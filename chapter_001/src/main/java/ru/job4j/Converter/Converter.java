@@ -11,13 +11,20 @@ package ru.job4j.calculator;
 * @since 0.1
 */ 
 public class Converter {
-    /**
+	
+	/**  Курс евро. */
+    private final int EURO_RATE = 70;
+	
+	/**  Курс доллара. */
+	private final int DOLLAR_RATE = 60;
+	
+	/**
      * Конвертируем рубли в евро.
      * @param value рубли.
      * @return Евро.
      */
     public int rubleToEuro(int value) {
-        return (value/70);
+        return (value/EURO_RATE);
     }
 
     /**
@@ -26,7 +33,7 @@ public class Converter {
      * @return рубли.
      */
     public int euroToRuble(int value) {
-        return (value*70);
+        return (value*EURO_RATE);
     }
 	
     /**
@@ -35,7 +42,7 @@ public class Converter {
      * @return Доллары
      */
     public int rubleToDollar(int value) {
-        return (value/60);
+        return (value/DOLLAR_RATE);
     }
 	
     /**
@@ -44,6 +51,6 @@ public class Converter {
      * @return рубли.
      */
     public int dollarToRuble(int value) {
-        return (value*60);
+        return (value*DOLLAR_RATE);
     }	
 }
