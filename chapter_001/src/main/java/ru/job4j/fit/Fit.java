@@ -7,10 +7,10 @@ package ru.job4j.calculator;
  */
 public class Fit {
 	/**  Коэффициент для роста. */
-	private static final double K_H = 100;
+	private static final double K_HEIGHT = 100;
 
 	/**  Коэффициент для веса. */
-	private static final double K_W = 15;
+	private static final double K_WEIGHT = 15;
 
 	/**
 	* Идеальный вес для мужчины
@@ -18,7 +18,7 @@ public class Fit {
 	* @return weight вес
 	*/
     double manWeight(double height) {
-		final double weight = (height - K_H)*K_W;
+		final double weight = (height - K_HEIGHT)*K_WEIGHT;
 		return weight;
     }
 
@@ -28,7 +28,7 @@ public class Fit {
 	* @return weight вес
 	*/
     double womanWeight(double height) {
-		final double weight = (height - K_H)*K_W;
+		final double weight = (height - K_HEIGHT)*K_WEIGHT;
 		return weight;
     }
 }
