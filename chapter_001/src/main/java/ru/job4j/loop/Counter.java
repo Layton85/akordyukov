@@ -1,10 +1,5 @@
 package ru.job4j.loop;
-//1. Необходимо создать класс Counter;
-//        2. В классе Counter написать метод public int add(int start, int finish) {};
-//        3. Метод должен вычислять сумму четныx чисел в диапазоне от start до finish;
-//        4. Класс Counter должен находиться в chapter_001\src\main\java\ru\job4j\loop\Counter.java;
-//        5. Тест-класс CounterTest должен находиться в chapter_001\src\test\java\ru\job4j\loop\CounterTest.java;
-//        6. В классе CounterTest напишите тест-метод, который будет проверять вашу программу.
+
 /**
  * Class Counter.
  *
