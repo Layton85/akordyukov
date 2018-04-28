@@ -1,4 +1,4 @@
-package ru.job4j.DummyBot;
+package ru.job4j.dummybot;
 
 /**
  * Class introducing primitive chat bot.

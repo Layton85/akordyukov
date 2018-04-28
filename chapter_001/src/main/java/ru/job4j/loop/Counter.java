@@ -16,11 +16,11 @@ public class Counter {
      */
     public int add(int start, int finish) {
         int sum = 0;
-
-        for (int cnt = start; cnt <= finish; cnt++)
-            if (cnt % 2 == 0)
+        for (int cnt = start; cnt <= finish; cnt++) {
+            if (cnt % 2 == 0) {
                 sum += cnt;
-
+            }
+        }
         return sum;
     }
 }

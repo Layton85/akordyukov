@@ -41,7 +41,7 @@ public class Triangle {
      * @return Полупериметр.
      */
     public double period(double ab, double ac, double bc) {
-        return (ab + ac + bc)/2D;
+        return (ab + ac + bc) / 2D;
     }
 
     /**
@@ -56,7 +56,7 @@ public class Triangle {
         double bc = this.b.distanceTo(this.c);
         double p = this.period(ab, ac, bc);
         if (this.exist(ab, ac, bc)) {
-            rsl = Math.sqrt(p*(p-ab)*(p-bc)*(p-ac)); //применение формулы Герона для расчета площади треугольника
+            rsl = Math.sqrt(p * (p - ab) * (p - bc) * (p - ac)); //применение формулы Герона для расчета площади треугольника
         }
         return rsl;
     }
@@ -72,12 +72,13 @@ public class Triangle {
     private boolean exist(double ab, double ac, double bc) {
         boolean rsl = true;
 
-        if ((ab + ac) <= bc)
+        if ((ab + ac) <= bc) {
             rsl = false;
-        else if ((ab + bc) <= ac)
+        } else if ((ab + bc) <= ac) {
             rsl = false;
-        else if ((ac + bc) <= ab)
+        } else if ((ac + bc) <= ab) {
             rsl = false;
+        }
 
         return rsl;
     }

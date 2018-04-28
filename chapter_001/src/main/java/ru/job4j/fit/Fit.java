@@ -18,7 +18,7 @@ public class Fit {
 	* @return weight вес
 	*/
     double manWeight(double height) {
-		final double weight = (height - K_HEIGHT)*K_WEIGHT;
+		final double weight = (height - K_HEIGHT) * K_WEIGHT;
 		return weight;
     }
 
@@ -28,7 +28,7 @@ public class Fit {
 	* @return weight вес
 	*/
     double womanWeight(double height) {
-		final double weight = (height - K_HEIGHT)*K_WEIGHT;
+		final double weight = (height - K_HEIGHT) * K_WEIGHT;
 		return weight;
     }
 }
