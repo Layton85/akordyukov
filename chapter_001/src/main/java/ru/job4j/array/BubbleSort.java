@@ -14,8 +14,8 @@ public class BubbleSort {
      * @return sorting array from less to greater
      */
     public int[] sort(int[] array) {
-        for (int j = 0; j < array.length - 1; j++) { //цикл по требуемому алгоритмом количеству проходов массива
-            for (int i = 0; i < array.length - 1 - j; i++) { //внутренний цикл каждого прохода
+        for (int j = 0; j < array.length - 1; j++) {
+            for (int i = 0; i < array.length - 1 - j; i++) {
                 if (array[i + 1] < array[i]) {
                     int temp = array[i];
                     array[i] = array[i + 1];
