@@ -40,20 +40,14 @@ public class SortedArrayFormation {
         int[] res = new int[a.length + b.length];
         int i = 0, j = 0, k = 0;
         while (k < (a.length + b.length)) {
-            if (i < a.length && j < b.length) {
-                if (a[i] <= b[j]) {
-                    res[k] = a[i];
-                    i++;
-                } else {
-                    res[k] = b[j];
-                    j++;
-                }
+            if (i < a.length && j < b.length && a[i] <= b[j]) {
+                res[k] = a[i++];
+            } else if (i < a.length && j < b.length && a[i] > b[j]) {
+                res[k] = b[j++];
             } else if (i >= a.length) {
-                res[k] = b[j];
-                j++;
+                res[k] = b[j++];
             } else if (j >= b.length) {
-                res[k] = a[i];
-                i++;
+                res[k] = a[i++];
             }
             k++;
         }
