@@ -59,4 +59,27 @@ public class IntersectingPiecesTest {
         boolean result = intersect.getIntersectionInformation();
         assertThat(result, is(expect));
     }
+
+    @Test
+    public void whenABPieceIncludesCDPiece() {
+        int a = -20;
+        int b = 20;
+        int c = -10;
+        int d = 10;
+        IntersectingPieces intersect = new IntersectingPieces(a, b, c, d);
+        boolean expect = true;
+        boolean result = intersect.getIntersectionInformation();
+        assertThat(result, is(expect));
+    }
+    @Test
+    public void whenCDPieceIncludesABPiece() {
+        int a = -5;
+        int b = 5;
+        int c = -10;
+        int d = 10;
+        IntersectingPieces intersect = new IntersectingPieces(a, b, c, d);
+        boolean expect = true;
+        boolean result = intersect.getIntersectionInformation();
+        assertThat(result, is(expect));
+    }
 }
