@@ -10,6 +10,11 @@ import java.util.function.BiPredicate;
  * @since 0.1
  */
 public class Paint {
+    /**
+     * The Method draws the right half of a text-pyramid.
+     * @param height - height of the pyramid.
+     * @return resulting String of a drawing the right half of a text-pyramid.
+     */
     public String rightTrl(int height) {
         return this.loopBy(
                 height,
@@ -18,6 +23,11 @@ public class Paint {
         );
     }
 
+    /**
+     * The Method draws the left half of a text-pyramid.
+     * @param height - height of the pyramid.
+     * @return resulting String of a drawing the left half of a text-pyramid.
+     */
     public String leftTrl(int height) {
         return this.loopBy(
                 height,
@@ -26,6 +36,11 @@ public class Paint {
         );
     }
 
+    /**
+     * The Method draws a text-pyramid.
+     * @param height - height of the pyramid.
+     * @return resulting String of a drawing of a text-pyramid.
+     */
     public String pyramid(int height) {
         return this.loopBy(
                 height,
@@ -34,6 +49,13 @@ public class Paint {
         );
     }
 
+    /**
+     * Auxilliary method for drawing a text-pyramid.
+     * @param height - height of the pyramid.
+     * @param weight - weight of the pyramid.
+     * @param predict - condition for drawing left and right parts of pyramid together.
+     * @return resulting String of a drawing of a text-pyramid.
+     */
     private String loopBy(int height, int weight, BiPredicate<Integer, Integer> predict) {
         StringBuilder screen = new StringBuilder();
         for (int row = 0; row != height; row++) {

@@ -13,7 +13,7 @@ package ru.job4j.converter;
 public class Converter {
 
     /**  Курс евро. */
-    private final int euroRATE = 70;
+    private final int euroRate = 70;
 
     /**  Курс доллара. */
     private final int dollarRATE = 60;
@@ -24,7 +24,7 @@ public class Converter {
      * @return Евро.
      */
     public int rubleToEuro(int value) {
-        return (value / euroRATE);
+        return (value / euroRate);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Converter {
      * @return рубли.
      */
     public int euroToRuble(int value) {
-        return (value * euroRATE);
+        return (value * euroRate);
     }
 
     /**

@@ -15,7 +15,7 @@ public class ArrayChar {
 
     /**
      * Constructor.
-     * @param initializing string.
+     * @param line initializing string.
      */
     public ArrayChar(String line) {
         this.data = line.toCharArray();

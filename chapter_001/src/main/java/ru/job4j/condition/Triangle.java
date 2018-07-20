@@ -71,7 +71,6 @@ public class Triangle {
      */
     private boolean exist(double ab, double ac, double bc) {
         boolean rsl = true;
-
         if ((ab + ac) <= bc) {
             rsl = false;
         } else if ((ab + bc) <= ac) {
@@ -79,7 +78,6 @@ public class Triangle {
         } else if ((ac + bc) <= ab) {
             rsl = false;
         }
-
         return rsl;
     }
 }
