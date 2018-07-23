@@ -90,11 +90,11 @@ public class Logic3T {
      */
     public boolean hasGap() {
         boolean result = false;
-        outer: for (int i = 0; i != this.table.length; i++) {
+        for (int i = 0; i != this.table.length && !result; i++) {
             for (int j = 0; j != this.table.length; j++) {
                 if (!(this.table[i][j].hasMarkO() || this.table[i][j].hasMarkX())) {
                     result = true;
-                    break outer;
+                    break;
                 }
             }
         }
