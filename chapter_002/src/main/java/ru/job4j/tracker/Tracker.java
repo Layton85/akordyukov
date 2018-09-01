@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -44,6 +45,7 @@ public class Tracker {
     public void replace(String id, Item item) {
         int editedPos = this.findPositionById(id);
         if (editedPos >= 0) {
+            item.setId(this.items[editedPos].getId());
             this.items[editedPos] = item;
         }
     }
@@ -56,8 +58,10 @@ public class Tracker {
      */
     public void delete(String id) {
         int delPos = this.findPositionById(id);
-        if (delPos >= 0) {
-            this.items[delPos] = this.items[this.position - 1];
+        if ((delPos >= 0) && (delPos <= this.position - 1)) {
+            if (delPos != this.position - 1) {
+                System.arraycopy(this.items, delPos + 1, this.items, delPos, this.position - (delPos + 1));
+            }
             this.items[this.position - 1] = null;
             this.position--;
         }
@@ -68,11 +72,7 @@ public class Tracker {
      * @return array of all items from the storage.
      */
     public Item[] getAll() {
-        Item[] result = new Item[this.position];
-        for (int i = 0; i != this.position; i++) {
-            result[i] = this.items[i];
-        }
-        return result;
+        return Arrays.copyOf(this.items, this.position);
     }
 
     /**
@@ -88,9 +88,7 @@ public class Tracker {
                 arr[cnt++] = items[i];
             }
         }
-        Item[] result = new Item[cnt];
-        System.arraycopy(arr, 0, result, 0, cnt);
-        return result;
+        return Arrays.copyOf(arr, cnt);
     }
 
     /**

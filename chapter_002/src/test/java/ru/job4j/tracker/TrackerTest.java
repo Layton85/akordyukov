@@ -27,7 +27,6 @@ public class TrackerTest {
         Item previous = new Item("test1", "testDescription1", 123L);
         tracker.add(previous);
         Item next = new Item("test2", "testDescription2", 1234L);
-        next.setId(previous.getId());
         tracker.replace(previous.getId(), next);
         assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
     }
@@ -35,7 +34,7 @@ public class TrackerTest {
     @Test
     public void whenDeleteOnlyItemThenTrackerHasNoAnyItems() {
         Tracker tracker = new Tracker();
-        Item item = new Item("test1", "testDescriptio1", 123L);
+        Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
         tracker.delete(tracker.getAll()[0].getId());
         Item[] empty = new Item[0];
@@ -43,30 +42,56 @@ public class TrackerTest {
     }
 
     @Test
-    public void whenDeleteFirstOfTwoItemsThenTrackerHasOnlySecondItem() {
+    public void whenDeleteFirstOfThreeItemsThenTrackerHasSecondAndThirdItems() {
         Tracker tracker = new Tracker();
         Item item1 = new Item("test1", "testDescription1", 123L);
         Item item2 = new Item("test2", "testDescription2", 124L);
+        Item item3 = new Item("test3", "testDescription3", 125L);
         tracker.add(item1);
         tracker.add(item2);
-        tracker.delete(tracker.getAll()[0].getId());
-        Item[] expected = new Item[1];
+        tracker.add(item3);
+        Item[] expected = new Item[2];
         expected[0] = new Item("test2", "testDescription2", 124L);
-        expected[0].setId(tracker.getAll()[0].getId());
+        expected[0].setId(tracker.getAll()[1].getId());
+        expected[1] = new Item("test3", "testDescription3", 125L);
+        expected[1].setId(tracker.getAll()[2].getId());
+        tracker.delete(tracker.getAll()[0].getId());
         assertArrayEquals(expected, tracker.getAll());
     }
 
     @Test
-    public void whenDeleteSecondOfTwoItemsThenTrackerHasOnlyFirstItem() {
+    public void whenDeleteSecondOfThreeItemsThenTrackerHasFirstAndThirdItems() {
         Tracker tracker = new Tracker();
         Item item1 = new Item("test1", "testDescription1", 123L);
         Item item2 = new Item("test2", "testDescription2", 124L);
+        Item item3 = new Item("test3", "testDescription3", 125L);
         tracker.add(item1);
         tracker.add(item2);
-        tracker.delete(tracker.getAll()[1].getId());
-        Item[] expected = new Item[1];
+        tracker.add(item3);
+        Item[] expected = new Item[2];
         expected[0] = new Item("test1", "testDescription1", 123L);
         expected[0].setId(tracker.getAll()[0].getId());
+        expected[1] = new Item("test3", "testDescription3", 125L);
+        expected[1].setId(tracker.getAll()[2].getId());
+        tracker.delete(tracker.getAll()[1].getId());
+        assertArrayEquals(expected, tracker.getAll());
+    }
+
+    @Test
+    public void whenDeleteThirdOfThreeItemsThenTrackerHasFirstAndSecondItems() {
+        Tracker tracker = new Tracker();
+        Item item1 = new Item("test1", "testDescription1", 123L);
+        Item item2 = new Item("test2", "testDescription2", 124L);
+        Item item3 = new Item("test3", "testDescription3", 125L);
+        tracker.add(item1);
+        tracker.add(item2);
+        tracker.add(item3);
+        Item[] expected = new Item[2];
+        expected[0] = new Item("test1", "testDescription1", 123L);
+        expected[0].setId(tracker.getAll()[0].getId());
+        expected[1] = new Item("test2", "testDescription2", 124L);
+        expected[1].setId(tracker.getAll()[1].getId());
+        tracker.delete(tracker.getAll()[2].getId());
         assertArrayEquals(expected, tracker.getAll());
     }
 
@@ -80,10 +105,10 @@ public class TrackerTest {
     @Test
     public void whenGetAllItemsThenTrackerGivesOneItem() {
         Tracker tracker = new Tracker();
-        Item item = new Item("test1", "testDescriptio1", 123L);
+        Item item = new Item("test1", "testDescription1", 123L);
         tracker.add(item);
         Item[] expected = new Item[1];
-        expected[0] = new Item("test1", "testDescriptio1", 123L);
+        expected[0] = new Item("test1", "testDescription1", 123L);
         expected[0].setId(tracker.getAll()[0].getId());
         assertArrayEquals(expected, tracker.getAll());
     }
