@@ -54,6 +54,7 @@ public class Tracker {
      * The method deletes item from the storage.
      * The method records the last non-null item in the storage in place of the deleted item.
      * Then the method sets null instead of the last non-null item and reduces position of storage on 1.
+     * If the storage doesn`t consist item with id received as parameter the method do nothing.
      * @param id - id of the item to deleting.
      */
     public void delete(String id) {

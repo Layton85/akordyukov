@@ -33,30 +33,15 @@ public class Item {
         this.created = created;
     }
 
-//    public Item(String id, String name, String desc, long created, String[] comments) {
-//        this.id = id;
-//        this.name = name;
-//        this.desc = desc;
-//        this.created = created;
-//        this.comments = comments;
-//    }
-
-//    public Item(Item item) {
-//        this.id = item.getId();
-//        this.name = item.getName();
-//        this.desc = item.getDesc();
-//        this.created = item.getCreated();
-//        this.comments = null;
-//        System.arraycopy(item.getComments(), 0, this.comments, 0, item.getComments().length);
-//    }
-
-//    public Item() {
-//        this.id = "";
-//        this.name = "";
-//        this.desc = "";
-//        this.created = 0;
-//        this.comments = null;
-//    }
+    /**
+     * Constructor.
+     * @param name - name of the item.
+     * @param desc - description of the item.
+     */
+    public Item(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
+    }
 
     /**
      * The method get id of this item
