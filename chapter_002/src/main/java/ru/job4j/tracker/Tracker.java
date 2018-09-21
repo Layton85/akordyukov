@@ -41,13 +41,17 @@ public class Tracker {
      * The method edits the item that already exist in the storage.
      * @param id - id of the edited item.
      * @param item - Item Object which replaces the edited item.
+     * @return result of function actions: true - item replaced successfully, false - item was not replaced.
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
         int editedPos = this.findPositionById(id);
         if (editedPos >= 0) {
             item.setId(this.items[editedPos].getId());
             this.items[editedPos] = item;
+            result = true;
         }
+        return result;
     }
 
     /**
@@ -56,8 +60,10 @@ public class Tracker {
      * Then the method sets null instead of the last non-null item and reduces position of storage on 1.
      * If the storage doesn`t consist item with id received as parameter the method do nothing.
      * @param id - id of the item to deleting.
+     * @return result of deleting item: true - item was deleted, false - item was not deleted.
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean result = false;
         int delPos = this.findPositionById(id);
         if ((delPos >= 0) && (delPos <= this.position - 1)) {
             if (delPos != this.position - 1) {
@@ -65,7 +71,9 @@ public class Tracker {
             }
             this.items[this.position - 1] = null;
             this.position--;
+            result = true;
         }
+        return result;
     }
 
     /**

@@ -163,4 +163,19 @@ public class Item {
         }
         return h;
     }
+
+    @Override
+    public String toString() {
+        String commentList = "";
+        if (this.comments != null && this.comments.length > 0) {
+            for (String str : this.comments) {
+                commentList += str + System.lineSeparator();
+            }
+        }
+        return "id: " + this.id + System.lineSeparator()
+                + "name: " + this.name + System.lineSeparator()
+                + "description: " + this.desc + System.lineSeparator()
+                + "creation time: " + this.created + System.lineSeparator()
+                + "comments: " + commentList + System.lineSeparator();
+    }
 }

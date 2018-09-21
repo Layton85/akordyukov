@@ -71,42 +71,36 @@ public class StartUI {
 
     /** function shows menu items in console to user */
     private void showMenu() {
-        String str = "Menu:\n"
-                        + "0. Add new item\n"
-                        + "1. Show all items\n"
-                        + "2. Edit item\n"
-                        + "3. Delete item\n"
-                        + "4. Find item by id\n"
-                        + "5. Find items by name\n"
-                        + "6. Exit Programm\n";
+        String str = "Menu:" + System.lineSeparator()
+                        + "0. Add new item" + System.lineSeparator()
+                        + "1. Show all items" + System.lineSeparator()
+                        + "2. Edit item" + System.lineSeparator()
+                        + "3. Delete item" + System.lineSeparator()
+                        + "4. Find item by id" + System.lineSeparator()
+                        + "5. Find items by name" + System.lineSeparator()
+                        + "6. Exit Programm" + System.lineSeparator();
         System.out.print(str);
     }
 
     /** function adds new item in tracker */
     private void createItem() {
         System.out.println("-------- Adding new item -------");
-        boolean check = false;
         String name = this.input.ask("enter item name: ");
-        if (!name.isEmpty()) {
-            String desc = this.input.ask("enter item description: ");
-            Item item = new Item(name, desc);
-            this.tracker.add(item);
-            System.out.println("------- new item with id: " + item.getId() + " was added -------");
-        } else {
-            System.out.println("incorrect item name");
-        }
+        String desc = this.input.ask("enter item description: ");
+        Item item = new Item(name, desc);
+        System.out.println("new item is: " + System.lineSeparator() + this.tracker.add(item).toString());
         System.out.println("--------------------");
     }
 
     /** function shows all items in tracker */
     private void showAllItems() {
         System.out.println("------- show all items in tracker: -------");
-        if (this.tracker.getAll().length == 0) {
+        Item[] arr = this.tracker.getAll();
+        if (arr.length == 0) {
             System.out.println("No any items in tracker");
         } else {
-            System.out.println("name ------- id");
-            for (Item item : this.tracker.getAll()) {
-                System.out.println(item.getName() + " " + item.getId());
+            for (Item item : arr) {
+                System.out.println(item.toString());
             }
         }
         System.out.println("--------------------");
@@ -116,12 +110,17 @@ public class StartUI {
     private void editItem() {
         System.out.println("------- edit item: -------");
         String id = this.input.ask("enter item id: ");
-        if (this.tracker.findById(id) == null) {
+        if (id.isEmpty()) {
             System.out.println("incorrect item id");
         } else {
             String name = this.input.ask("enter new item name: ");
-            this.tracker.findById(id).setName(name);
-            System.out.println("new item name is: " + this.tracker.findById(id).getName());
+            String description = this.input.ask("enter item description: ");
+            Item item = new Item(name, description);
+            if (this.tracker.replace(id, item)) {
+                System.out.println("successful edit of item");
+            } else {
+                System.out.println("error: item was not edited");
+            }
         }
         System.out.println("--------------------");
     }
@@ -130,11 +129,14 @@ public class StartUI {
     private void deleteItem() {
         System.out.println("------- delete item: -------");
         String id = this.input.ask("enter item id: ");
-        if (this.tracker.findById(id) == null) {
+        if (id.isEmpty()) {
             System.out.println("incorrect item id");
         } else {
-            this.tracker.delete(id);
-            System.out.println("the item with id " + id + " was deleted");
+            if (this.tracker.delete(id)) {
+                System.out.println("item was deleted successfully");
+            } else {
+                System.out.println("error: item was not delited");
+            }
         }
         System.out.println("--------------------");
     }
@@ -143,11 +145,11 @@ public class StartUI {
     private void findById() {
         System.out.println("------- find item by id: -------");
         String id = this.input.ask("enter item id: ");
-        if (this.tracker.findById(id) == null) {
+        Item item = this.tracker.findById(id);
+        if (item == null) {
             System.out.println("incorrect item id");
         } else {
-            System.out.println("name: " + this.tracker.findById(id).getName());
-            System.out.println("description: " + this.tracker.findById(id).getDesc());
+            System.out.println(item.toString());
         }
         System.out.println("--------------------");
     }
@@ -161,9 +163,7 @@ public class StartUI {
             System.out.println("items with this name was not found");
         } else {
             for (Item item : arr) {
-                System.out.println("\n" + "name: " + item.getName());
-                System.out.println("id: " + item.getId());
-                System.out.println("description: " + item.getDesc() + "\n");
+                System.out.println(item.toString());
             }
         }
         System.out.println("--------------------");
