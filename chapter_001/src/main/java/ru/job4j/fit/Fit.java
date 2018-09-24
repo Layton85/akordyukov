@@ -1,4 +1,4 @@
-package ru.job4j.calculator;
+package ru.job4j.fit;
 /**
  * Программа расчета идеального веса
  * @author Alexander Kordyukov (alex-programm@yandex.ru)
@@ -6,11 +6,14 @@ package ru.job4j.calculator;
  * @since 0.1
  */
 public class Fit {
-	/**  Коэффициент для роста. */
-	private static final double K_HEIGHT = 100;
+	/**  Коэффициент роста для мужчин. */
+	private static final double MAN_HEIGHT = 100;
+
+	/**  Коэффициент роста для женщин. */
+	private static final double WOMAN_HEIGHT = 110;
 
 	/**  Коэффициент для веса. */
-	private static final double K_WEIGHT = 15;
+	private static final double K_WEIGHT = 1.15;
 
 	/**
 	* Идеальный вес для мужчины
@@ -18,7 +21,7 @@ public class Fit {
 	* @return weight вес
 	*/
     double manWeight(double height) {
-		final double weight = (height - K_HEIGHT) * K_WEIGHT;
+		final double weight = (height - MAN_HEIGHT) * K_WEIGHT;
 		return weight;
     }
 
@@ -28,7 +31,7 @@ public class Fit {
 	* @return weight вес
 	*/
     double womanWeight(double height) {
-		final double weight = (height - K_HEIGHT) * K_WEIGHT;
+		final double weight = (height - WOMAN_HEIGHT) * K_WEIGHT;
 		return weight;
     }
 }

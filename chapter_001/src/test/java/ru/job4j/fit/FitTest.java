@@ -1,4 +1,4 @@
-package ru.job4j.calculator;
+package ru.job4j.fit;
 
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ public class FitTest {
     @Test
     public void womanWeight() {
         Fit fit = new Fit();
-        double weight = fit.manWeight(170);
+        double weight = fit.womanWeight(170);
         assertThat(weight, is(69D));
     }
 }
