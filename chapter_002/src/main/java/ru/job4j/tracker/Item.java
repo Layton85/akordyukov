@@ -164,6 +164,10 @@ public class Item {
         return h;
     }
 
+    /**
+     * Override method of Object method toString()
+     * @return  returns a textual representation of an Item.
+     */
     @Override
     public String toString() {
         String commentList = "";
