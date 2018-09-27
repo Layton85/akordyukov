@@ -38,7 +38,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         final int amount = 3;
         Item[] items = new Item[amount];
-        for(int i = 0; i < amount; i++) {
+        for (int i = 0; i < amount; i++) {
             items[i] = new Item("test" + String.valueOf(i + 1), "testDescription" + String.valueOf(i + 1),
                     123L + i);
             tracker.add(items[i]);
@@ -59,7 +59,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         final int amount = 3;
         Item[] items = new Item[amount];
-        for(int i = 0; i < amount; i++) {
+        for (int i = 0; i < amount; i++) {
             items[i] = new Item("test" + String.valueOf(i + 1), "testDescription" + String.valueOf(i + 1),
                     123L + i);
             tracker.add(items[i]);
@@ -80,7 +80,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         final int amount = 3;
         Item[] items = new Item[amount];
-        for(int i = 0; i < amount; i++) {
+        for (int i = 0; i < amount; i++) {
             items[i] = new Item("test" + String.valueOf(i + 1), "testDescription" + String.valueOf(i + 1),
                     123L + i);
             tracker.add(items[i]);
