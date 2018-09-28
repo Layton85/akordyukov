@@ -9,25 +9,25 @@ package ru.job4j.tracker;
  */
 public class StartUI {
     /** menu item "add new item in tracker" */
-    static final String ADD = "0";
+    private static final String ADD = "0";
 
     /** menu item "show all items in tracker" */
-    static final String SHOW = "1";
+    private static final String SHOW = "1";
 
     /** menu item "edit some item in tracker" */
-    static final String EDIT = "2";
+    private static final String EDIT = "2";
 
     /** menu item "delete some item from tracker" */
-    static final String DELETE = "3";
+    private static final String DELETE = "3";
 
     /** menu item "find some item in tracker using id as a key" */
-    static final String FINDID = "4";
+    private static final String FINDID = "4";
 
     /** menu item "find some items in tracker using name as a key" */
-    static final String FINDNAME = "5";
+    private static final String FINDNAME = "5";
 
     /** menu item "exit programm" */
-    static final String EXIT = "6";
+    private static final String EXIT = "6";
 
     /** reference to the I/O interface */
     private final Input input;

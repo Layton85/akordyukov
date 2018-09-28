@@ -9,7 +9,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{StartUI.ADD, "test", "desc", StartUI.EXIT});
+        Input input = new StubInput(new String[]{"0", "test", "desc", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.getAll()[0].getName(), is("test"));
     }
@@ -18,7 +18,7 @@ public class StartUITest {
     public void whenEditThenTrackerHasEditedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test", "desc"));
-        Input input = new StubInput(new String[]{StartUI.EDIT, item.getId(), "test replace", "заменили заявку", StartUI.EXIT});
+        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
@@ -27,7 +27,7 @@ public class StartUITest {
     public void whenDeleteOnlyItemThenTrackerHasNoAnyItems() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test", "desc"));
-        Input input = new StubInput(new String[] {StartUI.DELETE, item.getId(), StartUI.EXIT});
+        Input input = new StubInput(new String[] {"3", item.getId(), "6"});
         new StartUI(input, tracker).init();
         Item[] empty = new Item[0];
         assertArrayEquals(empty, tracker.getAll());
@@ -49,7 +49,7 @@ public class StartUITest {
                     123L + i + 1);
             expected[i].setId(tracker.getAll()[i + 1].getId());
         }
-        Input input = new StubInput(new String[] {StartUI.DELETE, items[0].getId(), StartUI.EXIT});
+        Input input = new StubInput(new String[] {"3", items[0].getId(), "6"});
         new StartUI(input, tracker).init();
         assertArrayEquals(expected, tracker.getAll());
     }
@@ -70,7 +70,7 @@ public class StartUITest {
                     123L + 2 * i);
             expected[i].setId(tracker.getAll()[2 * i].getId());
         }
-        Input input = new StubInput(new String[] {StartUI.DELETE, items[1].getId(), StartUI.EXIT});
+        Input input = new StubInput(new String[] {"3", items[1].getId(), "6"});
         new StartUI(input, tracker).init();
         assertArrayEquals(expected, tracker.getAll());
     }
@@ -91,7 +91,7 @@ public class StartUITest {
                     123L + i);
             expected[i].setId(tracker.getAll()[i].getId());
         }
-        Input input = new StubInput(new String[] {StartUI.DELETE, items[2].getId(), StartUI.EXIT});
+        Input input = new StubInput(new String[] {"3", items[2].getId(), "6"});
         new StartUI(input, tracker).init();
         assertArrayEquals(expected, tracker.getAll());
     }
