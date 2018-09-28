@@ -5,6 +5,13 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+/**
+ * StartUITest.
+ *
+ * @author Alexander Kordyukov (alex-programm@yandex.ru)
+ * @version $Id$
+ * @since 0.1
+ */
 public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
