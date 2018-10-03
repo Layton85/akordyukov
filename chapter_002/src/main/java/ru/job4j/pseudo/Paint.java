@@ -15,16 +15,4 @@ public class Paint {
     public void draw(Shape shape) {
         System.out.println(shape.draw());
     }
-
-    /*
-    * main function - entry point in programm.
-    * input of parameters isn't provided.
-    */
-    public static void main(String[] args) {
-        Paint paint = new Paint();
-        Shape shape = new Triangle();
-        paint.draw(shape);
-        shape = new Square();
-        paint.draw(shape);
-    }
 }
