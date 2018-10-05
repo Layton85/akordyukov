@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 /**
  * Item - class holds information about some record.
@@ -20,6 +21,20 @@ public class Item {
     private long created = 0;
     /** some comments */
     public String[] comments = null;
+
+    /**
+     * Constructor.
+     * @param name - name of the item.
+     * @param desc - description of the item.
+     * @param created - time of creating of the item.
+     * @param comments - comments to the item.
+     */
+    public Item(String name, String desc, long created, String[] comments) {
+        this.name = name;
+        this.desc = desc;
+        this.created = created;
+        this.comments = comments;
+    }
 
     /**
      * Constructor.
@@ -170,16 +185,16 @@ public class Item {
      */
     @Override
     public String toString() {
-        String commentList = "";
+        StringJoiner commentList = new StringJoiner(System.lineSeparator());
         if (this.comments != null && this.comments.length > 0) {
             for (String str : this.comments) {
-                commentList += str + System.lineSeparator();
+                commentList.add(str);
             }
         }
         return "id: " + this.id + System.lineSeparator()
                 + "name: " + this.name + System.lineSeparator()
                 + "description: " + this.desc + System.lineSeparator()
                 + "creation time: " + this.created + System.lineSeparator()
-                + "comments: " + commentList + System.lineSeparator();
+                + "comments: " + commentList.toString();
     }
 }

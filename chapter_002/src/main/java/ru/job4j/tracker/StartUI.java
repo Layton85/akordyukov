@@ -35,6 +35,16 @@ public class StartUI {
     /** reference to the Tracker object */
     private final Tracker tracker;
 
+    /** User Menu text */
+    private final String menuText = "Menu:" + System.lineSeparator()
+            + "0. Add new item" + System.lineSeparator()
+            + "1. Show all items" + System.lineSeparator()
+            + "2. Edit item" + System.lineSeparator()
+            + "3. Delete item" + System.lineSeparator()
+            + "4. Find item by id" + System.lineSeparator()
+            + "5. Find items by name" + System.lineSeparator()
+            + "6. Exit Program" + System.lineSeparator();
+
     /**
      * Constructor.
      * @param input - using I/O class
@@ -45,7 +55,7 @@ public class StartUI {
         this.tracker = tracker;
     }
 
-    /** function initializing programm */
+    /** function initializing program */
     public void init() {
         boolean exit = false;
         while (!exit) {
@@ -71,15 +81,15 @@ public class StartUI {
 
     /** function shows menu items in console to user */
     private void showMenu() {
-        String str = "Menu:" + System.lineSeparator()
-                        + "0. Add new item" + System.lineSeparator()
-                        + "1. Show all items" + System.lineSeparator()
-                        + "2. Edit item" + System.lineSeparator()
-                        + "3. Delete item" + System.lineSeparator()
-                        + "4. Find item by id" + System.lineSeparator()
-                        + "5. Find items by name" + System.lineSeparator()
-                        + "6. Exit Programm" + System.lineSeparator();
-        System.out.print(str);
+        System.out.print(this.menuText);
+    }
+
+    /**
+     * Get-method for the user menu text.
+     * @return - String menuText.
+     */
+    public String getMenuText() {
+        return this.menuText;
     }
 
     /** function adds new item in tracker */
