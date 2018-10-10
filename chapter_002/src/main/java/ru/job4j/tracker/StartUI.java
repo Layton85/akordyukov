@@ -35,7 +35,6 @@ public class StartUI {
             menu.show();
             menu.select(this.input.ask("select: "));
         } while (this.working);
-        //while (!"y".equals(menu.select(this.input.ask("select: "))));
     }
 
     /** The method stops the program */

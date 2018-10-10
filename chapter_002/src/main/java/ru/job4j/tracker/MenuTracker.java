@@ -459,9 +459,8 @@ class FindItemsByName implements UserAction {
  * @since 0.1
  */
 class ExitProgram implements UserAction {
-    /** reference to the main program n=module */
+    /** reference to the main program module */
     private final StartUI ui;
-
     /** key of this menu option */
     private int key;
     /** information of this menu option */
@@ -471,7 +470,7 @@ class ExitProgram implements UserAction {
      * Constructor
      * @param key - key of this menu option
      * @param info - information of this menu option
-     * @param ui - reference to the main program n=module
+     * @param ui - reference to the main program module
      */
     public ExitProgram(int key, String info, StartUI ui) {
         this.key = key;
