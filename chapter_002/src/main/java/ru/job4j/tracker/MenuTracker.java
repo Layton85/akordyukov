@@ -40,23 +40,23 @@ public class MenuTracker {
     /**
      * The method fill in the List of menu actions.
      */
-    public void fillActions() {
+    public void fillActions(StartUI ui) {
         this.actions.add(this.new AddItem(0, "Add new item"));
         this.actions.add(new ShowItems(1, "Show all items"));
         this.actions.add(new MenuTracker.EditItem(2, "Edit item"));
         this.actions.add(new MenuTracker.DeleteItem(3, "Delete item"));
         this.actions.add(new FindItemById(4, "Find item by id"));
         this.actions.add(new FindItemsByName(5, "Find items by name"));
-        this.actions.add(new ExitProgram(6, "Exit Program"));
+        this.actions.add(new ExitProgram(6, "Exit Program", ui));
     }
 
     /**
      * The method chooses the correct action depending on the specified key
      * @param menuCode - the key of the menu point
      */
-    public String select(String menuCode) {
+    public void select(String menuCode) {
         Integer key = Integer.parseInt(menuCode);
-        return this.actions.get(key).execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     /** The method showes menu */
@@ -117,13 +117,12 @@ public class MenuTracker {
         }
 
         /**
-         * Override method implements method String execute(Input input, Tracker tracker) from the interface UserAction.
+         * Override method implements method void execute(Input input, Tracker tracker) from the interface UserAction.
          * @param input - interface Input.
          * @param tracker - storage object Tracker.
-         * @return - the message generated during execution.
          */
         @Override
-        public String execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Adding new item --------------");
             String name = input.ask("Please, provide item name:");
             String desc = input.ask("Please, provide item description:");
@@ -132,7 +131,6 @@ public class MenuTracker {
             System.out.println("------------ New Item with Id : " + item.getId());
             System.out.println("------------ New Item with Name : " + item.getName());
             System.out.println("------------ New Item with Description : " + item.getDesc());
-            return "";
         }
 
         /**
@@ -177,13 +175,12 @@ public class MenuTracker {
         }
 
         /**
-         * Override method implements method String execute(Input input, Tracker tracker) from the interface UserAction.
+         * Override method implements method void execute(Input input, Tracker tracker) from the interface UserAction.
          * @param input - interface Input.
          * @param tracker - storage object Tracker.
-         * @return - the message generated during execution.
          */
         @Override
-        public String execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             System.out.println("------- show all items in tracker: -------");
             Item[] arr = tracker.getAll();
             if (arr.length == 0) {
@@ -194,7 +191,6 @@ public class MenuTracker {
                 }
             }
             System.out.println("--------------------");
-            return "";
         }
 
         /**
@@ -239,13 +235,12 @@ public class MenuTracker {
         }
 
         /**
-         * Override method implements method String execute(Input input, Tracker tracker) from the interface UserAction.
+         * Override method implements method void execute(Input input, Tracker tracker) from the interface UserAction.
          * @param input - interface Input.
          * @param tracker - storage object Tracker.
-         * @return - the message generated during execution.
          */
         @Override
-        public String execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             System.out.println("------- edit item: -------");
             String id = input.ask("enter item id: ");
             if (id.isEmpty()) {
@@ -261,7 +256,6 @@ public class MenuTracker {
                 }
             }
             System.out.println("--------------------");
-            return "";
         }
 
         /**
@@ -306,13 +300,12 @@ public class MenuTracker {
         }
 
         /**
-         * Override method implements method String execute(Input input, Tracker tracker) from the interface UserAction.
+         * Override method implements method void execute(Input input, Tracker tracker) from the interface UserAction.
          * @param input - interface Input.
          * @param tracker - storage object Tracker.
-         * @return - the message generated during execution.
          */
         @Override
-        public String execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             System.out.println("------- delete item: -------");
             String id = input.ask("enter item id: ");
             if (id.isEmpty()) {
@@ -325,7 +318,6 @@ public class MenuTracker {
                 }
             }
             System.out.println("--------------------");
-            return "";
         }
 
         /**
@@ -372,13 +364,12 @@ class FindItemById implements UserAction {
     }
 
     /**
-     * Override method implements method String execute(Input input, Tracker tracker) from the interface UserAction.
+     * Override method implements method void execute(Input input, Tracker tracker) from the interface UserAction.
      * @param input - interface Input.
      * @param tracker - storage object Tracker.
-     * @return - the message generated during execution.
      */
     @Override
-    public String execute(Input input, Tracker tracker) {
+    public void execute(Input input, Tracker tracker) {
         System.out.println("------- find item by id: -------");
         String id = input.ask("enter item id: ");
         Item item = tracker.findById(id);
@@ -388,7 +379,6 @@ class FindItemById implements UserAction {
             System.out.println(item.toString());
         }
         System.out.println("--------------------");
-        return "";
     }
 
     /**
@@ -433,13 +423,12 @@ class FindItemsByName implements UserAction {
     }
 
     /**
-     * Override method implements method String execute(Input input, Tracker tracker) from the interface UserAction.
+     * Override method implements method void execute(Input input, Tracker tracker) from the interface UserAction.
      * @param input - interface Input.
      * @param tracker - storage object Tracker.
-     * @return - the message generated during execution.
      */
     @Override
-    public String execute(Input input, Tracker tracker) {
+    public void execute(Input input, Tracker tracker) {
         System.out.println("------- find items by name: -------");
         String name = input.ask("enter item name: ");
         Item[] arr = tracker.findByName(name);
@@ -451,7 +440,6 @@ class FindItemsByName implements UserAction {
             }
         }
         System.out.println("--------------------");
-        return "";
     }
 
     /**
@@ -471,6 +459,9 @@ class FindItemsByName implements UserAction {
  * @since 0.1
  */
 class ExitProgram implements UserAction {
+    /** reference to the main program n=module */
+    private final StartUI ui;
+
     /** key of this menu option */
     private int key;
     /** information of this menu option */
@@ -480,10 +471,12 @@ class ExitProgram implements UserAction {
      * Constructor
      * @param key - key of this menu option
      * @param info - information of this menu option
+     * @param ui - reference to the main program n=module
      */
-    public ExitProgram(int key, String info) {
+    public ExitProgram(int key, String info, StartUI ui) {
         this.key = key;
         this.info = info;
+        this.ui = ui;
     }
 
     /**
@@ -496,14 +489,15 @@ class ExitProgram implements UserAction {
     }
 
     /**
-     * Override method implements method String execute(Input input, Tracker tracker) from the interface UserAction.
+     * Override method implements method void execute(Input input, Tracker tracker) from the interface UserAction.
      * @param input - interface Input.
      * @param tracker - storage object Tracker.
-     * @return - the message generated during execution.
      */
     @Override
-    public String execute(Input input, Tracker tracker) {
-        return input.ask("Exit?(y): ");
+    public void execute(Input input, Tracker tracker) {
+        if ("y".equals(input.ask("Exit?(y): "))) {
+            this.ui.stop();
+        }
     }
 
     /**

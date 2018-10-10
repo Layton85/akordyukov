@@ -14,6 +14,9 @@ public class StartUI {
     /** reference to the Tracker object */
     private final Tracker tracker;
 
+    /** flag of working program condition: true - program working, false - stopped. */
+    private boolean working = true;
+
     /**
      * Constructor.
      * @param input - using I/O class
@@ -24,13 +27,20 @@ public class StartUI {
         this.tracker = tracker;
     }
 
-    /** function initializing program */
+    /** the method initializing program */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        menu.fillActions();
+        menu.fillActions(this);
         do {
             menu.show();
-        } while (!"y".equals(menu.select(this.input.ask("select: "))));
+            menu.select(this.input.ask("select: "));
+        } while (this.working);
+        //while (!"y".equals(menu.select(this.input.ask("select: "))));
+    }
+
+    /** The method stops the program */
+    public void stop() {
+        this.working = false;
     }
 
     /* main function - entry point in programm */

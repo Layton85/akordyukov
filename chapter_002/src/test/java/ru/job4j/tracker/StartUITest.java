@@ -62,7 +62,7 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
-        menu.fillActions();
+        menu.fillActions(startUI);
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -84,7 +84,7 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
-        menu.fillActions();
+        menu.fillActions(startUI);
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -111,7 +111,7 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
-        menu.fillActions();
+        menu.fillActions(startUI);
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -140,7 +140,7 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
-        menu.fillActions();
+        menu.fillActions(startUI);
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -251,7 +251,7 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
-        menu.fillActions();
+        menu.fillActions(startUI);
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -274,7 +274,7 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
-        menu.fillActions();
+        menu.fillActions(startUI);
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -297,7 +297,7 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
-        menu.fillActions();
+        menu.fillActions(startUI);
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -320,7 +320,7 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
-        menu.fillActions();
+        menu.fillActions(startUI);
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -346,7 +346,7 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
-        menu.fillActions();
+        menu.fillActions(startUI);
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -368,7 +368,7 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
-        menu.fillActions();
+        menu.fillActions(startUI);
         assertThat(
                 new String(out.toByteArray()),
                 is(new String(menu.get()))

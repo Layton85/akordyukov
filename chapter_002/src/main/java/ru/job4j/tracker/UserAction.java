@@ -18,9 +18,8 @@ public interface UserAction {
      * The main method.
      * @param input Input object.
      * @param tracker  Tracker object.
-     * @return the message about execution process.
      */
-    String execute(Input input, Tracker tracker);
+    void execute(Input input, Tracker tracker);
 
     /**
      * The method gives information about menu point.
