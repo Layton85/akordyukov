@@ -30,4 +30,16 @@ public class StubInput implements Input {
     public String ask(String question) {
         return this.value[this.position++];
     }
+
+    /**
+     * The method implements method int ask(String question, int[] range) from interface Input.
+     * The method returns emulated menu key.
+     * @param question - programm question text.
+     * @param range - limit of the resolved values of the key.
+     * @return emulated menu key.
+     */
+    @Override
+    public int ask(String question, int[] range) {
+        return -1;
+    }
 }

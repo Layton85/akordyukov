@@ -38,6 +38,14 @@ public class MenuTracker {
     }
 
     /**
+     * Get-method for the actions length.
+     * @return - the size of the actions list.
+     */
+    public int getActionsLength() {
+        return actions.size();
+    }
+
+    /**
      * The method fill in the List of menu actions.
      */
     public void fillActions(StartUI ui) {
@@ -52,10 +60,10 @@ public class MenuTracker {
 
     /**
      * The method chooses the correct action depending on the specified key
-     * @param menuCode - the key of the menu point
+     * @param key - the key of the menu point
      */
-    public void select(String menuCode) {
-        Integer key = Integer.parseInt(menuCode);
+    public void select(int key) {
+        //Integer key = Integer.parseInt(menuCode);
         this.actions.get(key).execute(this.input, this.tracker);
     }
 

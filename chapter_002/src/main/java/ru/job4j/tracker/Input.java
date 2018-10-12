@@ -14,4 +14,12 @@ public interface Input {
      * @return reply to the question.
      */
     String ask(String question);
+
+    /**
+     * The method receive some string request and return int reply for them - key.
+     * @param question - programm question text.
+     * @param range - limit of the resolved values of the key.
+     * @return key.
+     */
+    int ask(String question, int[] range);
 }
