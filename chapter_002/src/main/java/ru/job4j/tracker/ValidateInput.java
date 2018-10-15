@@ -1,15 +1,37 @@
 package ru.job4j.tracker;
 
 /**
- * ValidateInput - class extends ConsoleInput.
+ * Class ValidateInput wraps Input for adding new behavior (pfattern Decorator)
+ * ValidateInput implements Input.
  * ValidateInput provides validate of user-entered values.
  * @author Alexander Kordyukov (alex-programm@yandex.ru)
  * @version $Id$
  * @since 0.1
  */
-public class ValidateInput extends ConsoleInput {
+public class ValidateInput implements Input {
+    /** Used Input interface */
+    private final Input input;
+
     /**
-     * Overriding method int ask(String question, List<Integer> range) from super class ConsoleInput.
+     * Constructor
+     * @param input - used Input interface.
+     */
+    public ValidateInput(final Input input) {
+        this.input = input;
+    }
+
+    /**
+     * Override method.
+     * @param question - request text.
+     * @return - String answer on question (depends on used Input interface).
+     */
+    @Override
+    public String ask(String question) {
+        return this.input.ask(question);
+    }
+
+    /**
+     * The method returns menu key using defined Input interface according to accepted range of input values.
      * @param question - programm question text.
      * @param range - limit of the resolved values of the key.
      * @return - entered menu key
@@ -19,7 +41,7 @@ public class ValidateInput extends ConsoleInput {
         int value = -1;
         do {
             try {
-                value = super.ask(question, range);
+                value = this.input.ask(question, range);
                 invalid = false;
             } catch (MenuOutException moe) {
                 System.out.println("Please select key from menu.");
