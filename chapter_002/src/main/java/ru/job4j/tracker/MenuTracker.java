@@ -99,29 +99,14 @@ public class MenuTracker {
      * @version $Id$
      * @since 0.1
      */
-    private class AddItem implements UserAction {
-        /** key of this menu option */
-        private int key;
-        /** information of this menu option */
-        private String info;
-
+    private class AddItem extends BaseAction {
         /**
          * Constructor
          * @param key - key of this menu option
-         * @param info - information of this menu option
+         * @param name - information of this menu option
          */
-        public AddItem(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        /**
-         * Override method implements method int key() from the interface UserAction.
-         * @return key of this menu option.
-         */
-        @Override
-        public int key() {
-            return this.key;
+        public AddItem(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -140,15 +125,6 @@ public class MenuTracker {
             System.out.println("------------ New Item with Name : " + item.getName());
             System.out.println("------------ New Item with Description : " + item.getDesc());
         }
-
-        /**
-         * Override method implements method String info() from the interface UserAction.
-         * @return - information of this menu option.
-         */
-        @Override
-        public String info() {
-            return String.format("%s.%s", this.key, this.info);
-        }
     }
 
     /**
@@ -157,29 +133,14 @@ public class MenuTracker {
      * @version $Id$
      * @since 0.1
      */
-    private class ShowItems implements UserAction {
-        /** key of this menu option */
-        private int key;
-        /** information of this menu option */
-        private String info;
-
+    private class ShowItems extends BaseAction {
         /**
          * Constructor
          * @param key - key of this menu option
-         * @param info - information of this menu option
+         * @param name - information of this menu option
          */
-        public ShowItems(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        /**
-         * Override method implements method int key() from the interface UserAction.
-         * @return key of this menu option.
-         */
-        @Override
-        public int key() {
-            return this.key;
+        public ShowItems(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -200,15 +161,6 @@ public class MenuTracker {
             }
             System.out.println("--------------------");
         }
-
-        /**
-         * Override method implements method String info() from the interface UserAction.
-         * @return - information of this menu option.
-         */
-        @Override
-        public String info() {
-            return String.format("%s.%s", this.key, this.info);
-        }
     }
 
     /**
@@ -217,29 +169,14 @@ public class MenuTracker {
      * @version $Id$
      * @since 0.1
      */
-    private static class EditItem implements UserAction {
-        /** key of this menu option */
-        private int key;
-        /** information of this menu option */
-        private String info;
-
+    private static class EditItem extends BaseAction {
         /**
          * Constructor
          * @param key - key of this menu option
-         * @param info - information of this menu option
+         * @param name - information of this menu option
          */
-        public EditItem(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        /**
-         * Override method implements method int key() from the interface UserAction.
-         * @return key of this menu option.
-         */
-        @Override
-        public int key() {
-            return this.key;
+        public EditItem(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -265,15 +202,6 @@ public class MenuTracker {
             }
             System.out.println("--------------------");
         }
-
-        /**
-         * Override method implements method String info() from the interface UserAction.
-         * @return - information of this menu option.
-         */
-        @Override
-        public String info() {
-            return String.format("%s.%s", this.key, this.info);
-        }
     }
 
     /**
@@ -282,29 +210,14 @@ public class MenuTracker {
      * @version $Id$
      * @since 0.1
      */
-    private static class DeleteItem implements UserAction {
-        /** key of this menu option */
-        private int key;
-        /** information of this menu option */
-        private String info;
-
+    private static class DeleteItem extends BaseAction {
         /**
          * Constructor
          * @param key - key of this menu option
-         * @param info - information of this menu option
+         * @param name - information of this menu option
          */
-        public DeleteItem(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        /**
-         * Override method implements method int key() from the interface UserAction.
-         * @return key of this menu option.
-         */
-        @Override
-        public int key() {
-            return this.key;
+        public DeleteItem(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -327,17 +240,7 @@ public class MenuTracker {
             }
             System.out.println("--------------------");
         }
-
-        /**
-         * Override method implements method String info() from the interface UserAction.
-         * @return - information of this menu option.
-         */
-        @Override
-        public String info() {
-            return String.format("%s.%s", this.key, this.info);
-        }
     }
-
 }
 
 /**
@@ -346,29 +249,14 @@ public class MenuTracker {
  * @version $Id$
  * @since 0.1
  */
-class FindItemById implements UserAction {
-    /** key of this menu option */
-    private int key;
-    /** information of this menu option */
-    private String info;
-
+class FindItemById extends BaseAction {
     /**
      * Constructor
      * @param key - key of this menu option
-     * @param info - information of this menu option
+     * @param name - information of this menu option
      */
-    public FindItemById(int key, String info) {
-        this.key = key;
-        this.info = info;
-    }
-
-    /**
-     * Override method implements method int key() from the interface UserAction.
-     * @return key of this menu option.
-     */
-    @Override
-    public int key() {
-        return this.key;
+    public FindItemById(int key, String name) {
+        super(key, name);
     }
 
     /**
@@ -388,15 +276,6 @@ class FindItemById implements UserAction {
         }
         System.out.println("--------------------");
     }
-
-    /**
-     * Override method implements method String info() from the interface UserAction.
-     * @return - information of this menu option.
-     */
-    @Override
-    public String info() {
-        return String.format("%s.%s", this.key, this.info);
-    }
 }
 
 /**
@@ -405,29 +284,14 @@ class FindItemById implements UserAction {
  * @version $Id$
  * @since 0.1
  */
-class FindItemsByName implements UserAction {
-    /** key of this menu option */
-    private int key;
-    /** information of this menu option */
-    private String info;
-
+class FindItemsByName extends BaseAction {
     /**
      * Constructor
      * @param key - key of this menu option
-     * @param info - information of this menu option
+     * @param name - information of this menu option
      */
-    public FindItemsByName(int key, String info) {
-        this.key = key;
-        this.info = info;
-    }
-
-    /**
-     * Override method implements method int key() from the interface UserAction.
-     * @return key of this menu option.
-     */
-    @Override
-    public int key() {
-        return this.key;
+    public FindItemsByName(int key, String name) {
+        super(key, name);
     }
 
     /**
@@ -449,15 +313,6 @@ class FindItemsByName implements UserAction {
         }
         System.out.println("--------------------");
     }
-
-    /**
-     * Override method implements method String info() from the interface UserAction.
-     * @return - information of this menu option.
-     */
-    @Override
-    public String info() {
-        return String.format("%s.%s", this.key, this.info);
-    }
 }
 
 /**
@@ -466,33 +321,19 @@ class FindItemsByName implements UserAction {
  * @version $Id$
  * @since 0.1
  */
-class ExitProgram implements UserAction {
+class ExitProgram extends BaseAction {
     /** reference to the main program module */
     private final StartUI ui;
-    /** key of this menu option */
-    private int key;
-    /** information of this menu option */
-    private String info;
 
     /**
      * Constructor
      * @param key - key of this menu option
-     * @param info - information of this menu option
+     * @param name - information of this menu option
      * @param ui - reference to the main program module
      */
-    public ExitProgram(int key, String info, StartUI ui) {
-        this.key = key;
-        this.info = info;
+    public ExitProgram(int key, String name, StartUI ui) {
+        super(key, name);
         this.ui = ui;
-    }
-
-    /**
-     * Override method implements method int key() from the interface UserAction.
-     * @return key of this menu option.
-     */
-    @Override
-    public int key() {
-        return this.key;
     }
 
     /**
@@ -505,14 +346,5 @@ class ExitProgram implements UserAction {
         if ("y".equals(input.ask("Exit?(y): "))) {
             this.ui.stop();
         }
-    }
-
-    /**
-     * Override method implements method String info() from the interface UserAction.
-     * @return - information of this menu option.
-     */
-    @Override
-    public String info() {
-        return String.format("%s.%s", this.key, this.info);
     }
 }
