@@ -20,19 +20,15 @@ public class PriorityQueue {
      * @param task - Task.
      */
     public void put(Task task) {
-        if (!this.tasks.isEmpty()) {
-            int index = 0;
-            for (Iterator<Task> it = this.tasks.iterator(); it.hasNext();) {
-                if (task.getPriority() >= it.next().getPriority()) {
-                    index++;
-                } else {
-                    break;
-                }
+        int index = 0;
+        for (Iterator<Task> it = this.tasks.iterator(); it.hasNext();) {
+            if (task.getPriority() >= it.next().getPriority()) {
+                index++;
+            } else {
+                break;
             }
-            this.tasks.add(index, task);
-        } else {
-            this.tasks.add(task);
         }
+        this.tasks.add(index, task);
     }
 
     /**
