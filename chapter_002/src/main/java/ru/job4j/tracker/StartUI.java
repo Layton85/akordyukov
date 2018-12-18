@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * StartUI - main class with entry point in programm.
  * StartUI provides console user interface for tracking system.
@@ -32,7 +35,7 @@ public class StartUI {
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions(this);
-        int[] range = this.fillRange(menu);
+        List<Integer> range = this.fillRange(menu);
         do {
             menu.show();
             menu.select(this.input.ask("select: ", range));
@@ -49,10 +52,10 @@ public class StartUI {
      * @param menu - MenuTracker object.
      * @return - filled range array.
      */
-    private int[] fillRange(MenuTracker menu) {
-        int[] result = new int[menu.getActionsLength()];
+    private List<Integer> fillRange(MenuTracker menu) {
+        List<Integer> result = new ArrayList<>();
         for (int i = 0; i < menu.getActionsLength(); i++) {
-            result[i] = i;
+            result.add(i);
         }
         return result;
     }

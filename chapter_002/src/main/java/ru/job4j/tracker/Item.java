@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.StringJoiner;
 
 /**
@@ -20,7 +22,7 @@ public class Item {
     /** time of creating of the item*/
     private long created = 0;
     /** some comments */
-    public String[] comments = null;
+    public List<String> comments = new ArrayList<>();
 
     /**
      * Constructor.
@@ -29,7 +31,7 @@ public class Item {
      * @param created - time of creating of the item.
      * @param comments - comments to the item.
      */
-    public Item(String name, String desc, long created, String[] comments) {
+    public Item(String name, String desc, long created, List<String> comments) {
         this.name = name;
         this.desc = desc;
         this.created = created;
@@ -126,7 +128,7 @@ public class Item {
      * The method get comments of this item
      * @return comments of this item
      */
-    public String[] getComments() {
+    public List<String> getComments() {
         return comments;
     }
 
@@ -134,7 +136,7 @@ public class Item {
      * The method sets comments for this item
      * @param comments - comments for this item.
      */
-    public void setComments(String[] comments) {
+    public void setComments(List<String> comments) {
         this.comments = comments;
     }
 
@@ -156,7 +158,7 @@ public class Item {
                     && this.name.equals(that.name)
                     && this.desc.equals(that.desc)
                     && this.created == that.created
-                    && Arrays.equals(this.comments, that.comments);
+                    && this.comments.equals(that.comments);
         }
         return result;
     }
@@ -173,8 +175,8 @@ public class Item {
         h = prime * h + ((this.name == null) ? 0 : this.name.hashCode());
         h = prime * h + ((this.desc == null) ? 0 : this.desc.hashCode());
         h = prime * h + (int) this.created;
-        for (int i = 0; i < this.comments.length; i++) {
-            h = prime * h + ((this.comments[i] == null) ? 0 : this.comments[i].hashCode());
+        for (String str : this.comments) {
+            h = prime * h + ((str == null) ? 0 : str.hashCode());
         }
         return h;
     }
@@ -186,7 +188,7 @@ public class Item {
     @Override
     public String toString() {
         StringJoiner commentList = new StringJoiner(System.lineSeparator());
-        if (this.comments != null && this.comments.length > 0) {
+        if (this.comments != null && !this.comments.isEmpty()) {
             for (String str : this.comments) {
                 commentList.add(str);
             }

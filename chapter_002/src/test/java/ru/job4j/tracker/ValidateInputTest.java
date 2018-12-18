@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -38,8 +39,8 @@ public class ValidateInputTest {
 
     @Test
     public void whenInvalidInput() {
-        ValidateInput input = new ValidateInput(new StubInput(new String[] {"invalid", "1"}));
-        input.ask("Enter", new int[] {1});
+        ValidateInput input = new ValidateInput(new StubInput(Arrays.asList("invalid", "1")));
+        input.ask("Enter", Arrays.asList(1));
         assertThat(
                 this.out.toString(),
                 is(
@@ -50,8 +51,8 @@ public class ValidateInputTest {
 
     @Test
     public void whenInputOutOfMenuRange() {
-        ValidateInput input = new ValidateInput(new StubInput(new String[] {"-1", "1"}));
-        input.ask("Enter", new int[] {1});
+        ValidateInput input = new ValidateInput(new StubInput(Arrays.asList("-1", "1")));
+        input.ask("Enter", Arrays.asList(1));
         assertThat(
                 this.out.toString(),
                 is(
@@ -62,8 +63,8 @@ public class ValidateInputTest {
 
     @Test
     public void whenInputCorrect() {
-        ValidateInput input = new ValidateInput(new StubInput(new String[] {"1"}));
-        input.ask("Enter", new int[] {1});
+        ValidateInput input = new ValidateInput(new StubInput(Arrays.asList("1")));
+        input.ask("Enter", Arrays.asList(1));
         assertThat(
                 this.out.toString(),
                 is(

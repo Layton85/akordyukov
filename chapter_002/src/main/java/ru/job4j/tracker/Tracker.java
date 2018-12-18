@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -12,9 +14,7 @@ import java.util.Random;
  */
 public class Tracker {
     /** storage of items */
-    private final Item[] items = new Item[100];
-    /** current position of items counter - show current number of non-null Items in the storage */
-    private int position = 0;
+    private final List<Item> items = new ArrayList<>();
     /** Random Object for generating random numbers for id. */
     private static final Random RN = new Random();
 
@@ -25,7 +25,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -47,8 +47,8 @@ public class Tracker {
         boolean result = false;
         int editedPos = this.findPositionById(id);
         if (editedPos >= 0) {
-            item.setId(this.items[editedPos].getId());
-            this.items[editedPos] = item;
+            item.setId(this.items.get(editedPos).getId());
+            this.items.set(editedPos, item);
             result = true;
         }
         return result;
@@ -65,12 +65,8 @@ public class Tracker {
     public boolean delete(String id) {
         boolean result = false;
         int delPos = this.findPositionById(id);
-        if ((delPos >= 0) && (delPos <= this.position - 1)) {
-            if (delPos != this.position - 1) {
-                System.arraycopy(this.items, delPos + 1, this.items, delPos, this.position - (delPos + 1));
-            }
-            this.items[this.position - 1] = null;
-            this.position--;
+        if ((delPos >= 0)) {
+            this.items.remove(delPos);
             result = true;
         }
         return result;
@@ -80,8 +76,8 @@ public class Tracker {
      * The method gets all items from the storage.
      * @return array of all items from the storage.
      */
-    public Item[] getAll() {
-        return Arrays.copyOf(this.items, this.position);
+    public List<Item> getAll() {
+        return this.items;
     }
 
     /**
@@ -89,15 +85,14 @@ public class Tracker {
      * @param key - the name field with wich items are looked for.
      * @return array of all items from the storage with name like a key.
      */
-    public Item[] findByName(String key) {
-        Item[] arr = new Item[100];
-        int cnt = 0;
-        for (int i = 0; i < position; i++) {
-            if (this.items[i].getName().equals(key)) {
-                arr[cnt++] = items[i];
+    public List<Item> findByName(String key) {
+        List<Item> list = new ArrayList<>();
+        for (Item item : this.items) {
+            if (item.getName().equals(key)) {
+                list.add(item);
             }
         }
-        return Arrays.copyOf(arr, cnt);
+        return list;
     }
 
     /**
@@ -123,9 +118,9 @@ public class Tracker {
      */
     private int findPositionById(String id) {
         int result = -1;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getId().equals(id)) {
-                result = i;
+        for (Item item : this.items) {
+            if (item.getId().equals(id)) {
+                result = this.items.indexOf(item);
                 break;
             }
         }

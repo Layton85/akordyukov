@@ -63,7 +63,6 @@ public class MenuTracker {
      * @param key - the key of the menu point
      */
     public void select(int key) {
-        //Integer key = Integer.parseInt(menuCode);
         this.actions.get(key).execute(this.input, this.tracker);
     }
 
@@ -151,11 +150,11 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("------- show all items in tracker: -------");
-            Item[] arr = tracker.getAll();
-            if (arr.length == 0) {
+            List<Item> list = tracker.getAll();
+            if (list.isEmpty()) {
                 System.out.println("No any items in tracker");
             } else {
-                for (Item item : arr) {
+                for (Item item : list) {
                     System.out.println(item.toString());
                 }
             }
@@ -303,11 +302,11 @@ class FindItemsByName extends BaseAction {
     public void execute(Input input, Tracker tracker) {
         System.out.println("------- find items by name: -------");
         String name = input.ask("enter item name: ");
-        Item[] arr = tracker.findByName(name);
-        if (arr.length == 0) {
+        List<Item> list = tracker.findByName(name);
+        if (list.isEmpty()) {
             System.out.println("items with this name was not found");
         } else {
-            for (Item item : arr) {
+            for (Item item : list) {
                 System.out.println(item.toString());
             }
         }

@@ -6,6 +6,9 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringJoiner;
 
 import static org.hamcrest.core.Is.is;
@@ -50,15 +53,15 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "test", "desc", "6", "y"});
+        Input input = new StubInput(Arrays.asList("0", "test", "desc", "6", "y"));
         new StartUI(input, tracker).init();
-        assertThat(tracker.getAll()[0].getName(), is("test"));
+        assertThat(tracker.getAll().get(0).getName(), is("test"));
     }
 
     @Test
     public void whenUserAskShowAllItemsAndTrackerHasNoAnyItemsThenTrackerShowMessage() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"1", "6", "y"});
+        Input input = new StubInput(Arrays.asList("1", "6", "y"));
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
@@ -80,7 +83,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "desc1", 123L);
         tracker.add(item);
-        Input input = new StubInput(new String[]{"1", "6", "y"});
+        Input input = new StubInput(Arrays.asList("1", "6", "y"));
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
@@ -105,9 +108,9 @@ public class StartUITest {
     @Test
     public void whenUserAskShowAllItemsThenTrackerShowOneItemWithComments() {
         Tracker tracker = new Tracker();
-        Item item = new Item("test1", "desc1", 123L, new String[]{"comment1", "comment2"});
+        Item item = new Item("test1", "desc1", 123L, Arrays.asList("comment1", "comment2"));
         tracker.add(item);
-        Input input = new StubInput(new String[]{"1", "6", "y"});
+        Input input = new StubInput(Arrays.asList("1", "6", "y"));
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
@@ -132,11 +135,11 @@ public class StartUITest {
     @Test
     public void whenUserAskShowAllItemsThenTrackerShowTwoItemsWithComments() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item("test1", "desc1", 123L, new String[]{"comment11", "Comment12"});
+        Item item1 = new Item("test1", "desc1", 123L, Arrays.asList("comment11", "Comment12"));
         tracker.add(item1);
-        Item item2 = new Item("test2", "desc2", 124L, new String[]{"comment21"});
+        Item item2 = new Item("test2", "desc2", 124L, Arrays.asList("comment21"));
         tracker.add(item2);
-        Input input = new StubInput(new String[]{"1", "6", "y"});
+        Input input = new StubInput(Arrays.asList("1", "6", "y"));
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
@@ -164,7 +167,7 @@ public class StartUITest {
     public void whenEditThenTrackerHasEditedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test", "desc"));
-        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6", "y"});
+        Input input = new StubInput(Arrays.asList("2", item.getId(), "test replace", "заменили заявку", "6", "y"));
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
@@ -173,73 +176,71 @@ public class StartUITest {
     public void whenDeleteOnlyItemThenTrackerHasNoAnyItems() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test", "desc"));
-        Input input = new StubInput(new String[]{"3", item.getId(), "6", "y"});
+        Input input = new StubInput(Arrays.asList("3", item.getId(), "6", "y"));
         new StartUI(input, tracker).init();
-        Item[] empty = new Item[0];
-        assertArrayEquals(empty, tracker.getAll());
+        List<Item> empty = new ArrayList<>();
+        assertThat(empty.equals(tracker.getAll()), is(true));
     }
 
     @Test
     public void whenDeleteFirstOfThreeItemsThenTrackerHasSecondAndThirdItems() {
         Tracker tracker = new Tracker();
         final int amount = 3;
-        Item[] items = new Item[amount];
+        List<Item> items = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
-            items[i] = new Item("test" + String.valueOf(i + 1), "testDescription" + String.valueOf(i + 1),
-                    123L + i);
-            tracker.add(items[i]);
+            items.add(new Item("test" + String.valueOf(i + 1), "testDescription" + String.valueOf(i + 1), 123L + i));
+            tracker.add(items.get(i));
         }
-        Item[] expected = new Item[amount - 1];
+        List<Item> expected = new ArrayList<>();
         for (int i = 0; i < amount - 1; i++) {
-            expected[i] = new Item("test" + String.valueOf(i + 2), "testDescription" + String.valueOf(i + 2),
-                    123L + i + 1);
-            expected[i].setId(tracker.getAll()[i + 1].getId());
+            expected.add(new Item("test" + String.valueOf(i + 2), "testDescription" + String.valueOf(i + 2), 123L + i + 1));
+            expected.get(i).setId(tracker.getAll().get(i + 1).getId());
         }
-        Input input = new StubInput(new String[]{"3", items[0].getId(), "6", "y"});
+        Input input = new StubInput(Arrays.asList("3", items.get(0).getId(), "6", "y"));
         new StartUI(input, tracker).init();
-        assertArrayEquals(expected, tracker.getAll());
+        assertThat(expected.equals(tracker.getAll()), is(true));
     }
 
     @Test
     public void whenDeleteSecondOfThreeItemsThenTrackerHasFirstAndThirdItems() {
         Tracker tracker = new Tracker();
         final int amount = 3;
-        Item[] items = new Item[amount];
+        List<Item> items = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
-            items[i] = new Item("test" + String.valueOf(i + 1), "testDescription" + String.valueOf(i + 1),
-                    123L + i);
-            tracker.add(items[i]);
+            items.add(new Item("test" + String.valueOf(i + 1), "testDescription" + String.valueOf(i + 1),
+                    123L + i));
+            tracker.add(items.get(i));
         }
-        Item[] expected = new Item[amount - 1];
+        List<Item> expected = new ArrayList<>();
         for (int i = 0; i < amount - 1; i++) {
-            expected[i] = new Item("test" + String.valueOf(2 * i + 1), "testDescription" + String.valueOf(2 * i + 1),
-                    123L + 2 * i);
-            expected[i].setId(tracker.getAll()[2 * i].getId());
+            expected.add(new Item("test" + String.valueOf(2 * i + 1), "testDescription" + String.valueOf(2 * i + 1),
+                    123L + 2 * i));
+            expected.get(i).setId(tracker.getAll().get(2 * i).getId());
         }
-        Input input = new StubInput(new String[]{"3", items[1].getId(), "6", "y"});
+        Input input = new StubInput(Arrays.asList("3", items.get(1).getId(), "6", "y"));
         new StartUI(input, tracker).init();
-        assertArrayEquals(expected, tracker.getAll());
+        assertThat(expected.equals(tracker.getAll()), is(true));
     }
 
     @Test
     public void whenDeleteThirdOfThreeItemsThenTrackerHasFirstAndSecondItems() {
         Tracker tracker = new Tracker();
         final int amount = 3;
-        Item[] items = new Item[amount];
+        List<Item> items = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
-            items[i] = new Item("test" + String.valueOf(i + 1), "testDescription" + String.valueOf(i + 1),
-                    123L + i);
-            tracker.add(items[i]);
+            items.add(new Item("test" + String.valueOf(i + 1), "testDescription" + String.valueOf(i + 1),
+                    123L + i));
+            tracker.add(items.get(i));
         }
-        Item[] expected = new Item[amount - 1];
+        List<Item> expected = new ArrayList<>();
         for (int i = 0; i < amount - 1; i++) {
-            expected[i] = new Item("test" + String.valueOf(i + 1), "testDescription" + String.valueOf(i + 1),
-                    123L + i);
-            expected[i].setId(tracker.getAll()[i].getId());
+            expected.add(new Item("test" + String.valueOf(i + 1), "testDescription" + String.valueOf(i + 1),
+                    123L + i));
+            expected.get(i).setId(tracker.getAll().get(i).getId());
         }
-        Input input = new StubInput(new String[]{"3", items[2].getId(), "6", "y"});
+        Input input = new StubInput(Arrays.asList("3", items.get(2).getId(), "6", "y"));
         new StartUI(input, tracker).init();
-        assertArrayEquals(expected, tracker.getAll());
+        assertThat(expected.equals(tracker.getAll()), is(true));
     }
 
     @Test
@@ -247,7 +248,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "desc1", 123L);
         tracker.add(item);
-        Input input = new StubInput(new String[]{"4", "000", "6", "y"});
+        Input input = new StubInput(Arrays.asList("4", "000", "6", "y"));
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
@@ -270,7 +271,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "desc1", 123L);
         tracker.add(item);
-        Input input = new StubInput(new String[]{"4", tracker.getAll()[0].getId(), "6", "y"});
+        Input input = new StubInput(Arrays.asList("4", tracker.getAll().get(0).getId(), "6", "y"));
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
@@ -293,7 +294,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "desc1", 123L);
         tracker.add(item);
-        Input input = new StubInput(new String[]{"5", "000", "6", "y"});
+        Input input = new StubInput(Arrays.asList("5", "000", "6", "y"));
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
@@ -316,7 +317,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "desc1", 123L);
         tracker.add(item);
-        Input input = new StubInput(new String[]{"5", "test1", "6", "y"});
+        Input input = new StubInput(Arrays.asList("5", "test1", "6", "y"));
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
@@ -342,7 +343,7 @@ public class StartUITest {
         Item item2 = new Item("test", "desc2", 124L);
         tracker.add(item2);
 
-        Input input = new StubInput(new String[]{"5", "test", "6", "y"});
+        Input input = new StubInput(Arrays.asList("5", "test", "6", "y"));
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);
@@ -364,7 +365,7 @@ public class StartUITest {
     @Test
     public void whenExitStartUIReturnsOnlyMenu() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"6", "y"});
+        Input input = new StubInput(Arrays.asList("6", "y"));
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         MenuTracker menu = new MenuTracker(input, tracker);

@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * Input - interface class facilitating work with I/O System.
  *
@@ -21,5 +23,5 @@ public interface Input {
      * @param range - limit of the resolved values of the key.
      * @return key.
      */
-    int ask(String question, int[] range);
+    int ask(String question, List<Integer> range);
 }

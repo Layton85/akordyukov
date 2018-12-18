@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * Class ValidateInput wraps Input for adding new behavior (pfattern Decorator)
  * ValidateInput implements Input.
@@ -36,7 +38,7 @@ public class ValidateInput implements Input {
      * @param range - limit of the resolved values of the key.
      * @return - entered menu key
      */
-    public int ask(String question, int[] range) {
+    public int ask(String question, List<Integer> range) {
         boolean invalid = true;
         int value = -1;
         do {
