@@ -9,13 +9,15 @@ import java.util.Objects;
  * @version $Id$
  * @since 0.1
  */
-public class User {
+public class User implements Comparable<User> {
     /** User id */
-    private int id;
+    private int id = 0;
     /** User name */
-    private String name;
+    private String name = null;
+    /** User age */
+    private int age = 0;
     /** User city */
-    private String city;
+    private String city = null;
 
     /**
      * Constructor
@@ -30,11 +32,29 @@ public class User {
     }
 
     /**
+     * Constructor
+     * @param name - User name
+     * @param age - User age
+     */
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    /**
      * Get-method
      * @return - User id
      */
     public int getId() {
         return this.id;
+    }
+
+    /**
+     * Get-method
+     * @return - User age
+     */
+    public int getAge() {
+        return this.age;
     }
 
     /**
@@ -67,5 +87,32 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, city);
+    }
+
+    /**
+     * Override method toString() for the class User.
+     * @return - string representation of the User object.
+     */
+    @Override
+    public String toString() {
+        return "User{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", age=" + age
+                + ", city='" + city + '\''
+                + '}';
+    }
+
+    /**
+     * Override method compareTo(T o) for the class User
+     * @param o - another User object for the comparation
+     * @return - a negative integer, zero, or a positive integer as this object
+     *          is less than, equal to, or greater than the specified object.
+     */
+    @Override
+    public int compareTo(User o) {
+        //return this.age > o.getAge() ? 1 : this.age < o.getAge() ? -1 : 0; //Integer.valueOf(this.age).compareTo(o.getAge());
+        return Integer.compare(this.age, o.getAge());
+        //return Integer.valueOf(this.age).compareTo(o.getAge());
     }
 }
