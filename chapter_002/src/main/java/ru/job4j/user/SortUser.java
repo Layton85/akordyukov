@@ -18,19 +18,6 @@ public class SortUser {
      * @return sorted TreeSet producted from User List.
      */
     public Set<User> sort(List<User> users) {
-        //Set<User> set = new TreeSet<User>(users);
-        return new TreeSet<User>(users); //set;
+        return new TreeSet<User>(users);
     }
-
-//    public static void main(String[] args) {
-//        SortUser sorted = new SortUser();
-//        List<User> users = new ArrayList<User>();
-//        users.add(new User("Nick", 32));
-//        users.add(new User("Ivan", 27));
-//        users.add(new User("Maria", 21));
-//        Set<User> tree = new TreeSet<>();
-//        tree = sorted.sort(users);
-//        System.out.println("users: " + users);
-//        System.out.println("tree" + tree);
-//    }
 }
