@@ -84,4 +84,34 @@ public class SortUserTest {
         expected.add(new User("Vlad", 30));
         assertThat(expected.equals(tree), is(true));
     }
+
+    @Test
+    public void whenThreeUsersWithDifferentNamesThenSortedByNameLength() {
+        List<User> users = new ArrayList<User>();
+        users.add(new User("Karina"));
+        users.add(new User("Jim"));
+        users.add(new User("Vlad"));
+        new SortUser().sortNameLength(users);
+        List<User> expected = new ArrayList<>();
+        expected.add(new User("Jim"));
+        expected.add(new User("Vlad"));
+        expected.add(new User("Karina"));
+        assertThat(expected.equals(users), is(true));
+    }
+
+    @Test
+    public void whenFourUsersWithDifferentNamesAndAgesThenSortedByAllFields() {
+        List<User> users = new ArrayList<User>();
+        users.add(new User("Sergey", 25));
+        users.add(new User("Ivan", 30));
+        users.add(new User("Sergey", 20));
+        users.add(new User("Ivan", 25));
+        new SortUser().sortByAllFields(users);
+        List<User> expected = new ArrayList<>();
+        expected.add(new User("Ivan", 25));
+        expected.add(new User("Ivan", 30));
+        expected.add(new User("Sergey", 20));
+        expected.add(new User("Sergey", 25));
+        assertThat(expected.equals(users), is(true));
+    }
 }

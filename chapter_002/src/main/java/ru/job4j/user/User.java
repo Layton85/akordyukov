@@ -21,6 +21,14 @@ public class User implements Comparable<User> {
 
     /**
      * Constructor
+     * @param name - User name
+     */
+    public User(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Constructor
      * @param id - User id
      * @param name - User name
      * @param city - User city
@@ -47,6 +55,14 @@ public class User implements Comparable<User> {
      */
     public int getId() {
         return this.id;
+    }
+
+    /**
+     * Get-method
+     * @return - User name.
+     */
+    public String getName() {
+        return this.name;
     }
 
     /**
