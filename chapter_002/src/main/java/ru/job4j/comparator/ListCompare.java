@@ -18,29 +18,22 @@ public class ListCompare implements Comparator<String> {
      * @param left - string to compare
      * @param right - another string to compare
      * @return - result of lexicographic comparation:
-     *  -1  - when first lexicographically less then right,
+     *   less then 0 - when first lexicographically less then right,
      *   0  - when first and right are lexicographically same,
-     *   1  - when first lexicographically greater then right.
+     *   greater then 0 - when first lexicographically greater then right.
      */
     @Override
     public int compare(String left, String right) {
         int result = 0;
         if (!left.equals(right)) {
             for (int i = 0; i < Integer.min(left.length(), right.length()); i++) {
-                if (Character.compare(left.charAt(i), right.charAt(i)) > 0) {
-                    result = 1;
-                    break;
-                } else if (Character.compare(left.charAt(i), right.charAt(i)) < 0) {
-                    result = -1;
+                result = Character.compare(left.charAt(i), right.charAt(i));
+                if (result != 0) {
                     break;
                 }
             }
             if (result == 0) {
-                if (left.length() < right.length()) {
-                    result = -1;
-                } else {
-                    result = 1;
-                }
+                result = left.length() - right.length();
             }
         }
         return result;
