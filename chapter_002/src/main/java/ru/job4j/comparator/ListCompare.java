@@ -25,17 +25,12 @@ public class ListCompare implements Comparator<String> {
     @Override
     public int compare(String left, String right) {
         int result = 0;
-        if (!left.equals(right)) {
-            for (int i = 0; i < Integer.min(left.length(), right.length()); i++) {
-                result = Character.compare(left.charAt(i), right.charAt(i));
-                if (result != 0) {
-                    break;
-                }
-            }
-            if (result == 0) {
-                result = left.length() - right.length();
+        for (int i = 0; i < Integer.min(left.length(), right.length()); i++) {
+            result = Character.compare(left.charAt(i), right.charAt(i));
+            if (result != 0) {
+                break;
             }
         }
-        return result;
+        return result == 0 ? left.length() - right.length() : result;
     }
 }
