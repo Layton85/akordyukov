@@ -1,3 +1,7 @@
+п»ї[![Build Status](https://travis-ci.org/Layton85/akordyukov.svg?branch=master)](https://travis-ci.org/Layton85/akordyukov)
+[![codecov](https://codecov.io/gh/Layton85/akordyukov/branch/master/graph/badge.svg)](https://codecov.io/gh/Layton85/akordyukov)
+
+# Р РµРїРѕР·РёС‚РѕСЂРёР№ РђР»РµРєСЃР°РЅРґСЂР° РљРѕСЂРґСЋРєРѕРІР°
 # akordyukov
-# репозиторий Александра Кордюкова
-Я прохожу обучение по курсу job4j на уровне "Стажер". Планирую закончить его за месяц.
+РЇ РїСЂРѕС…РѕР¶Сѓ РѕР±СѓС‡РµРЅРёРµ java РїРѕ РєСѓСЂСЃСѓ job4j.
+Р’ СЂРµРїРѕР·РёС‚РѕСЂРёРё РїСЂРµРґСЃС‚Р°РІР»РµРЅС‹ РЅР°РёР±РѕР»РµРµ РёРЅС‚РµСЂРµСЃРЅС‹Рµ Р·Р°РґР°С‡Рё, РІС‹РїРѕР»РЅРµРЅРЅС‹Рµ РјРЅРѕР№ РІРѕ РІСЂРµРјСЏ РѕР±СѓС‡РµРЅРёСЏ.
