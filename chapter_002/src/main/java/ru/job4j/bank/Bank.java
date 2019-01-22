@@ -17,24 +17,16 @@ public class Bank {
     /**
      * Adding User into the storage
      * @param user - User for adding
-     * @throws IllegalArgumentException when the specified User is null
      */
     public void addUser(User user) {
-        if (user == null) {
-            throw new IllegalArgumentException("Specified user argument is null !");
-        }
         this.usersStorage.putIfAbsent(user, new ArrayList<>());
     }
 
     /**
      * Deleting User from the storage
      * @param user - User for deleting
-     * @throws IllegalArgumentException when the specified User is null
      */
     public void deleteUser(User user) {
-        if (user == null) {
-            throw new IllegalArgumentException("Specidied user argument is null !");
-        }
         this.usersStorage.remove(user);
     }
 
@@ -42,16 +34,11 @@ public class Bank {
      * Adding Account to User in the storage
      * @param passport - User passport
      * @param account - User account
-     * @throws IllegalArgumentException when the specified User passport or account is null
      */
     public void addAccountToUser(String passport, Account account) {
-        if (passport == null || account == null) {
-            throw new IllegalArgumentException("Specified argument is null !");
-        }
-        try {
-            this.usersStorage.get(this.getUserFromStorage(passport)).add(account);
-        } catch (NullPointerException nPE) {
-            this.exceptionOuterPrint(nPE.toString(), "user with this passport was not found in storage.");
+        List<Account> list = usersStorage.get(this.getUserFromStorage(passport));
+        if (list != null) {
+            list.add(account);
         }
     }
 
@@ -59,16 +46,11 @@ public class Bank {
      * Deleting Account from the User in the storage
      * @param passport - User passport
      * @param account - User account
-     * @throws IllegalArgumentException when the specified User passport or account is null
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        if (passport == null || account == null) {
-            throw new IllegalArgumentException("Specified argument is null !");
-        }
-        try {
-            this.usersStorage.get(this.getUserFromStorage(passport)).remove(account);
-        } catch (NullPointerException nPE) {
-            this.exceptionOuterPrint(nPE.toString(), "user with this passport was not found in storage.");
+        List<Account> list = usersStorage.get(this.getUserFromStorage(passport));
+        if (list != null) {
+            list.remove(account);
         }
     }
 
@@ -77,12 +59,8 @@ public class Bank {
      * @param passport - User passport
      * @return - The List of User`s Accounts.
      * If the User was not found or it have not any Accounts the method returns an empty List.
-     * @throws IllegalArgumentException when the specified passport is null.
      */
     public List<Account> getUserAccounts(String passport) {
-        if (passport == null) {
-            throw new IllegalArgumentException("Specified argument passport is null !");
-        }
         List<Account> accountsList = new ArrayList<>();
         User user = this.getUserFromStorage(passport);
         if (user != null) {
@@ -100,15 +78,8 @@ public class Bank {
      * @param amount - amount of the transferred money
      * @return - true if the operation was successfully passed,
      *              false if the operation was not passed
-     * @throws IllegalArgumentException if any one of parameters is null or the specified amount of money equals or less then 0
      */
     public boolean transferMoney(String srcPassport, String srcRequisites, String destPassport, String destRequisites, double amount) {
-        if (srcPassport == null || srcRequisites == null || destPassport == null || destRequisites == null) {
-            throw new IllegalArgumentException("Wrong source or destination was specified !");
-        }
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Wrong amount was specified !");
-        }
         boolean result = false;
         if (!srcRequisites.equals(destRequisites) && !srcPassport.equals(destPassport)) {
             Account srcAccount = this.getAccount(srcPassport, srcRequisites);
@@ -129,12 +100,8 @@ public class Bank {
      * @param passport - passport string of User which is looking for.
      * @return - the first occurence of the User with specified passport string in the usersStorage.
      * If no any Users was found the method returns null.
-     * @throws IllegalArgumentException when the specified passport is null
      */
     private User getUserFromStorage(String passport) {
-        if (passport == null) {
-            throw new IllegalArgumentException("Specified passport argument is null !");
-        }
         User result = null;
         for (User user : this.usersStorage.keySet()) {
             if (user.getPassport().equals(passport)) {
@@ -152,9 +119,6 @@ public class Bank {
      * @return - founded Account or null if Account was not found
      */
     private Account getAccount(String passport, String requisites) {
-        if (passport == null) {
-            throw new IllegalArgumentException("Specified passport argument is null !");
-        }
         Account resAccount = null;
         List<Account> list = this.getUserAccounts(passport);
         if (list != null) {
@@ -166,21 +130,5 @@ public class Bank {
             }
         }
         return resAccount;
-    }
-
-    /**
-     * Service private method.
-     * The method printed exception information and some additional comments
-     * @param excStr - exception information
-     * @param addText - some additional comments
-     */
-    private void exceptionOuterPrint(String excStr, String addText) {
-        StringBuilder outer = new StringBuilder();
-        outer.append(excStr);
-        if (addText != null) {
-            outer.append(System.lineSeparator());
-            outer.append(addText);
-        }
-        System.out.println(outer.toString());
     }
 }

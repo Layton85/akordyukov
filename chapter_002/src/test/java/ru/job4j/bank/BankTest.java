@@ -121,40 +121,4 @@ public class BankTest {
                 is(true)
         );
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenTransferMoneyAndAmountLessThen0WasSpecified() {
-        Bank bank = this.prepareBank();
-        bank.transferMoney("333222", "111000", "444222", "222000", -1);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenTransferMoneyAndAmountEqual0WasSpecified() {
-        Bank bank = this.prepareBank();
-        bank.transferMoney("333222", "111000", "444222", "222000", 0);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenTransferMoneyAndSrcPassportWasNull() {
-        Bank bank = this.prepareBank();
-        bank.transferMoney(null, "111000", "444222", "222000", 50);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenTransferMoneyAndSrcRequisitesWereNull() {
-        Bank bank = this.prepareBank();
-        bank.transferMoney("333222", null, "444222", "222000", 50);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenTransferMoneyAndDestPassportWasNull() {
-        Bank bank = this.prepareBank();
-        bank.transferMoney("333222", "111000", null, "222000", 50);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void whenTransferMoneyAndDestRequisitesWereNull() {
-        Bank bank = this.prepareBank();
-        bank.transferMoney("333222", "111000", "444222", null, 50);
-    }
 }

@@ -16,12 +16,8 @@ public class Account {
      * Constructor
      * @param value - amount of money on the Account
      * @param requisites - Account requisites
-     * @throws IllegalArgumentException - when requisites are null
      */
     public Account(double value, String requisites) {
-        if (requisites == null) {
-            throw  new IllegalArgumentException("Wrong requisites were entered during creation Account object !");
-        }
         this.value = value;
         this.requisites = requisites;
     }
