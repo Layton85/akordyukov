@@ -16,7 +16,7 @@ public class DepartmentSort {
 
     /**
      * Constructor
-     * @param inputList - "weak" input List which perhaps needs to be completed.
+     * @param inputList - "weak" input list which perhaps needs to be completed.
      */
     public DepartmentSort(List<String> inputList) {
         this.departments = this.complete(inputList);
@@ -31,55 +31,59 @@ public class DepartmentSort {
     }
 
     /**
-     * The method completes specified input List if it is necessary.
+     * The method completes specified input List if it is necessary and fills in department list.
+     * The method iterates input list and for each element looks for a completing lexemes
+     * which have to be an independent strings (corresponding hierarchy logic) but they haven`t.
+     * Example: input - "K1", "K1\SK1\SSK2". Lexeme "K1\SK1" is missed and needs to be added.
+     * Then the method adds all missed lexemes in the specified list.
      * @param inputList - "weak" input List which perhaps needs to be completed.
      * @return - completed input List
      */
-    public List<String> complete(List<String> inputList) {
-        List<String> addList = new ArrayList<>(); //лист дополнений
-        for (String str : inputList) {          //цикл по входному листу
+    private List<String> complete(List<String> inputList) {
+        List<String> addList = new ArrayList<>();
+        for (String str : inputList) {
             Pattern pattern = Pattern.compile("\\\\");
-            List<String> lexemes = Arrays.asList(pattern.split(str)); //получили список лексем текущей строки входного массива
-            StringJoiner addStrJ = new StringJoiner("\\"); //строка-дополнение
-            for (String lex : lexemes) {         //цикл по лексемам текущей строки
-                addStrJ.add(lex);            //"наращивание" потенциальной строки-дополнения в процессе чтения лексем данной строки
+            List<String> lexemes = Arrays.asList(pattern.split(str));
+            StringJoiner addStrJ = new StringJoiner("\\");
+            for (String lex : lexemes) {
+                addStrJ.add(lex);
                 boolean found = false;
-                if (!addList.contains(addStrJ.toString())) { //если такая строка-дополнение еще не добавлена к листу дополнений
-                    for (String inputStr : inputList) {       //цикл по входному массиву
-                        if (addStrJ.toString().equals(inputStr)) { //поиск текущего варианта строки-дополнения во входном списке строк
+                if (!addList.contains(addStrJ.toString())) {
+                    for (String inputStr : inputList) {
+                        if (addStrJ.toString().equals(inputStr)) {
                             found = true;
                             break;
                         }
                     }
-                    if (!found) { //добавление текущего строки-дополнения к листу дополнений, если она не была найдена
+                    if (!found) {
                         addList.add(addStrJ.toString());
                     }
                 }
             }
         }
-        inputList.addAll(addList); //добавление листа дополнений к входному листу
+        inputList.addAll(addList);
         return inputList;
     }
 
-//    public void ascendingSort(List<String> list) {
-//        list.sort(null);
-//    }
-
     /**
-     * The method sorts depatments list by lexicographical ascending considering hierarchy structure
-     * @return - depatments list sorting by ascending
+     * The method sorts departments list by lexicographical ascending considering hierarchy structure.
+     * Example:
+     * input list - "K2\SK1", "K1", "K1\SK2", "K1\SK1", "K2"
+     * sorted list - "K1", "K1\SK1", "K1\SK2", "K2", "K2\SK1"
+     * @return - departments list sorting by ascending
      */
-    public List<String> ascendingSort() {
+    public void ascendingSort() {
         this.departments.sort(null);
-        return this.departments;
     }
 
-    //public void descendingSort(List<String> list)
     /**
-     * The method sorts depatments list by lexicographical descending considering hierarchy structure
-     * @return - depatments list sorting by descending
+     * The method sorts departments list by lexicographical descending considering hierarchy structure.
+     * Example:
+     * input list - "K2\SK1", "K1", "K1\SK2", "K1\SK1", "K2"
+     * sorted list - "K2", "K2\SK1", "K1", "K1\SK2", "K1\SK1"
+     * @return - departments list sorting by descending
      */
-    public List<String> descendingSort() {
+    public void descendingSort() {
         this.departments.sort(new Comparator<String>() {
             @Override
             public int compare(String left, String right) {
@@ -101,11 +105,10 @@ public class DepartmentSort {
                     bR = matRight.find();
                 }
                 if (result == 0) {
-                    result = (bL) ? 1 : -1;
+                    result = bL ? 1 : bR ? -1 : 0;
                 }
                 return result;
             }
         });
-        return this.departments;
     }
 }

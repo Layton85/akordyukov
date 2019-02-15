@@ -1,9 +1,9 @@
 package ru.job4j.departmentsort;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -21,7 +21,7 @@ public class DepartmentSortTest {
      * this method prepare common data (input array, DepartmentSort object) for the other test methods.
      * @return - DepartmentSort object with complete input department list.
      */
-    public DepartmentSort prepareData() {
+    private DepartmentSort prepareData() {
         String[] input = new String[]{
                 "K1\\SK1",
                 "K1\\SK2",
@@ -31,12 +31,8 @@ public class DepartmentSortTest {
                 "K2\\SK1\\SSK1",
                 "K2\\SK1\\SSK2"
         };
-        List<String> inputList = new ArrayList<>();
-        for (String str : input) {
-            inputList.add(str);
-        }
-        DepartmentSort dep = new DepartmentSort(inputList);
-        return dep;
+        List<String> inputList = new ArrayList<>(Arrays.asList(input));
+        return new DepartmentSort(inputList);
     }
 
     @Test
