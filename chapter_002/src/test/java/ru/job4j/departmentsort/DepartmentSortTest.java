@@ -2,9 +2,7 @@ package ru.job4j.departmentsort;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -31,14 +29,12 @@ public class DepartmentSortTest {
                 "K2\\SK1\\SSK1",
                 "K2\\SK1\\SSK2"
         };
-        List<String> inputList = new ArrayList<>(Arrays.asList(input));
-        return new DepartmentSort(inputList);
+        TreeSet<String> inputTree = new TreeSet<>(Arrays.asList(input));
+        return new DepartmentSort(inputTree);
     }
 
     @Test
     public void ascendingOrderSort() {
-        DepartmentSort dep = prepareData();
-        dep.ascendingSort();
         List<String> expected = new ArrayList<>();
         expected.add("K1");
         expected.add("K1\\SK1");
@@ -49,13 +45,11 @@ public class DepartmentSortTest {
         expected.add("K2\\SK1");
         expected.add("K2\\SK1\\SSK1");
         expected.add("K2\\SK1\\SSK2");
-        assertThat(dep.getDepartments(), is(expected));
+        assertThat(prepareData().ascendingSort(), is(expected));
     }
 
     @Test
     public void descendingOrderSort() {
-        DepartmentSort dep = prepareData();
-        dep.descendingSort();
         List<String> expected = new ArrayList<>();
         expected.add("K2");
         expected.add("K2\\SK1");
@@ -66,6 +60,6 @@ public class DepartmentSortTest {
         expected.add("K1\\SK1");
         expected.add("K1\\SK1\\SSK2");
         expected.add("K1\\SK1\\SSK1");
-        assertThat(dep.getDepartments(), is(expected));
+        assertThat(prepareData().descendingSort(), is(expected));
     }
 }
