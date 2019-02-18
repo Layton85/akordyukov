@@ -47,15 +47,8 @@ public class DepartmentSort {
             StringJoiner addStrJ = new StringJoiner("\\");
             for (String lex : lexemes) {
                 addStrJ.add(lex);
-                boolean found = false;
                 if (!addList.contains(addStrJ.toString())) {
-                    for (String inputStr : inputList) {
-                        if (addStrJ.toString().equals(inputStr)) {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
+                    if (!inputList.contains(addStrJ.toString())) {
                         addList.add(addStrJ.toString());
                     }
                 }
@@ -87,27 +80,9 @@ public class DepartmentSort {
         this.departments.sort(new Comparator<String>() {
             @Override
             public int compare(String left, String right) {
-                int result = 0;
-                Pattern pat = Pattern.compile("[^\\\\]+");
-                Matcher matLeft = pat.matcher(left);
-                Matcher matRight = pat.matcher(right);
-                boolean bL = matLeft.find();
-                boolean bR = matRight.find();
-                while (bL && bR) {
-                    if (matLeft.group().compareTo(matRight.group()) < 0) {
-                        result = 1;
-                        break;
-                    } else if (matLeft.group().compareTo(matRight.group()) > 0) {
-                        result = -1;
-                        break;
-                    }
-                    bL = matLeft.find();
-                    bR = matRight.find();
-                }
-                if (result == 0) {
-                    result = bL ? 1 : bR ? -1 : 0;
-                }
-                return result;
+                int minLen = Math.min(left.length(), right.length());
+                int result = -left.substring(0, minLen).compareTo(right.substring(0, minLen));
+                return result != 0 ? result : Integer.compare(left.length(), right.length());
             }
         });
     }
