@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.function.Consumer;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -32,6 +33,21 @@ public class StartUITest {
      */
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
+    /** output using functional interface */
+    private final Consumer<String> output = new Consumer<String>() {
+        private final PrintStream stdout = new PrintStream(out);
+
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+
+        @Override
+        public String toString() {
+            return new String(out.toByteArray());
+        }
+    };
+
     /**
      * The method reload system output to the variable out.
      * loadOutput() always executes before tests.
@@ -42,7 +58,7 @@ public class StartUITest {
     }
 
     /**
-     * The method changes output to the standart system output in console.
+     * The method changes output to the standard system output in console.
      * backOutput() always executes after tests.
      */
     @After
@@ -54,7 +70,7 @@ public class StartUITest {
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
         Input input = new StubInput(Arrays.asList("0", "test", "desc", "6", "y"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
         assertThat(tracker.getAll().get(0).getName(), is("test"));
     }
 
@@ -62,12 +78,12 @@ public class StartUITest {
     public void whenUserAskShowAllItemsAndTrackerHasNoAnyItemsThenTrackerShowMessage() {
         Tracker tracker = new Tracker();
         Input input = new StubInput(Arrays.asList("1", "6", "y"));
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, this.output);
         startUI.init();
-        MenuTracker menu = new MenuTracker(input, tracker);
+        MenuTracker menu = new MenuTracker(input, tracker, this.output);
         menu.fillActions(startUI);
         assertThat(
-                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringJoiner(System.lineSeparator(), menu.get(), System.lineSeparator() + menu.get())
                                 .add("------- show all items in tracker: -------")
@@ -84,12 +100,12 @@ public class StartUITest {
         Item item = new Item("test1", "desc1", 123L);
         tracker.add(item);
         Input input = new StubInput(Arrays.asList("1", "6", "y"));
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, this.output);
         startUI.init();
-        MenuTracker menu = new MenuTracker(input, tracker);
+        MenuTracker menu = new MenuTracker(input, tracker, this.output);
         menu.fillActions(startUI);
         assertThat(
-                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(menu.get())
@@ -111,12 +127,12 @@ public class StartUITest {
         Item item = new Item("test1", "desc1", 123L, Arrays.asList("comment1", "comment2"));
         tracker.add(item);
         Input input = new StubInput(Arrays.asList("1", "6", "y"));
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, this.output);
         startUI.init();
-        MenuTracker menu = new MenuTracker(input, tracker);
+        MenuTracker menu = new MenuTracker(input, tracker, this.output);
         menu.fillActions(startUI);
         assertThat(
-                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(menu.get())
@@ -140,12 +156,12 @@ public class StartUITest {
         Item item2 = new Item("test2", "desc2", 124L, Arrays.asList("comment21"));
         tracker.add(item2);
         Input input = new StubInput(Arrays.asList("1", "6", "y"));
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, this.output);
         startUI.init();
-        MenuTracker menu = new MenuTracker(input, tracker);
+        MenuTracker menu = new MenuTracker(input, tracker, this.output);
         menu.fillActions(startUI);
         assertThat(
-                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringBuilder()
                                 .append(menu.get())
@@ -168,7 +184,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test", "desc"));
         Input input = new StubInput(Arrays.asList("2", item.getId(), "test replace", "заменили заявку", "6", "y"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
 
@@ -177,7 +193,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test", "desc"));
         Input input = new StubInput(Arrays.asList("3", item.getId(), "6", "y"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
         List<Item> empty = new ArrayList<>();
         assertThat(empty.equals(tracker.getAll()), is(true));
     }
@@ -197,7 +213,7 @@ public class StartUITest {
             expected.get(i).setId(tracker.getAll().get(i + 1).getId());
         }
         Input input = new StubInput(Arrays.asList("3", items.get(0).getId(), "6", "y"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
         assertThat(expected.equals(tracker.getAll()), is(true));
     }
 
@@ -218,7 +234,7 @@ public class StartUITest {
             expected.get(i).setId(tracker.getAll().get(2 * i).getId());
         }
         Input input = new StubInput(Arrays.asList("3", items.get(1).getId(), "6", "y"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
         assertThat(expected.equals(tracker.getAll()), is(true));
     }
 
@@ -239,7 +255,7 @@ public class StartUITest {
             expected.get(i).setId(tracker.getAll().get(i).getId());
         }
         Input input = new StubInput(Arrays.asList("3", items.get(2).getId(), "6", "y"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
         assertThat(expected.equals(tracker.getAll()), is(true));
     }
 
@@ -249,12 +265,12 @@ public class StartUITest {
         Item item = new Item("test1", "desc1", 123L);
         tracker.add(item);
         Input input = new StubInput(Arrays.asList("4", "000", "6", "y"));
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, this.output);
         startUI.init();
-        MenuTracker menu = new MenuTracker(input, tracker);
+        MenuTracker menu = new MenuTracker(input, tracker, this.output);
         menu.fillActions(startUI);
         assertThat(
-                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringJoiner(System.lineSeparator())
                                 .add(menu.get() + "------- find item by id: -------")
@@ -272,12 +288,12 @@ public class StartUITest {
         Item item = new Item("test1", "desc1", 123L);
         tracker.add(item);
         Input input = new StubInput(Arrays.asList("4", tracker.getAll().get(0).getId(), "6", "y"));
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, this.output);
         startUI.init();
-        MenuTracker menu = new MenuTracker(input, tracker);
+        MenuTracker menu = new MenuTracker(input, tracker, this.output);
         menu.fillActions(startUI);
         assertThat(
-                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringJoiner(System.lineSeparator())
                                 .add(menu.get() + "------- find item by id: -------")
@@ -295,12 +311,12 @@ public class StartUITest {
         Item item = new Item("test1", "desc1", 123L);
         tracker.add(item);
         Input input = new StubInput(Arrays.asList("5", "000", "6", "y"));
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, this.output);
         startUI.init();
-        MenuTracker menu = new MenuTracker(input, tracker);
+        MenuTracker menu = new MenuTracker(input, tracker, this.output);
         menu.fillActions(startUI);
         assertThat(
-                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringJoiner(System.lineSeparator())
                                 .add(menu.get() + "------- find items by name: -------")
@@ -318,12 +334,12 @@ public class StartUITest {
         Item item = new Item("test1", "desc1", 123L);
         tracker.add(item);
         Input input = new StubInput(Arrays.asList("5", "test1", "6", "y"));
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, this.output);
         startUI.init();
-        MenuTracker menu = new MenuTracker(input, tracker);
+        MenuTracker menu = new MenuTracker(input, tracker, this.output);
         menu.fillActions(startUI);
         assertThat(
-                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringJoiner(System.lineSeparator())
                                 .add(menu.get() + "------- find items by name: -------")
@@ -344,12 +360,12 @@ public class StartUITest {
         tracker.add(item2);
 
         Input input = new StubInput(Arrays.asList("5", "test", "6", "y"));
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, this.output);
         startUI.init();
-        MenuTracker menu = new MenuTracker(input, tracker);
+        MenuTracker menu = new MenuTracker(input, tracker, this.output);
         menu.fillActions(startUI);
         assertThat(
-                new String(out.toByteArray()),
+                this.output.toString(),
                 is(
                         new StringJoiner(System.lineSeparator())
                                 .add(menu.get() + "------- find items by name: -------")
@@ -366,12 +382,12 @@ public class StartUITest {
     public void whenExitStartUIReturnsOnlyMenu() {
         Tracker tracker = new Tracker();
         Input input = new StubInput(Arrays.asList("6", "y"));
-        StartUI startUI = new StartUI(input, tracker);
+        StartUI startUI = new StartUI(input, tracker, this.output);
         startUI.init();
-        MenuTracker menu = new MenuTracker(input, tracker);
+        MenuTracker menu = new MenuTracker(input, tracker, this.output);
         menu.fillActions(startUI);
         assertThat(
-                new String(out.toByteArray()),
+                this.output.toString(),
                 is(new String(menu.get()))
         );
     }

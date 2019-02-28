@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * UserAction - interface for the user actions.
  *
@@ -19,7 +21,7 @@ public interface UserAction {
      * @param input Input object.
      * @param tracker  Tracker object.
      */
-    void execute(Input input, Tracker tracker);
+    void execute(Input input, Tracker tracker, Consumer<String> output);
 
     /**
      * The method gives information about menu point.

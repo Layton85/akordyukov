@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 import java.util.List;
 
 /**
@@ -19,21 +20,27 @@ public class StartUI {
 
     /** flag of working program condition: true - program working, false - stopped. */
     private boolean working = true;
+
+    /** Tracker Menu */
     private MenuTracker menu;
+
+    /** output action */
+    private final Consumer<String> output;
 
     /**
      * Constructor.
      * @param input - using I/O class
      * @param tracker - connected Tracker object
      */
-    public StartUI(Input input, Tracker tracker) {
+    public StartUI(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     /** the method initializing program */
     public void init() {
-        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        MenuTracker menu = new MenuTracker(this.input, this.tracker, this.output);
         menu.fillActions(this);
         List<Integer> range = this.fillRange(menu);
         do {
@@ -62,6 +69,6 @@ public class StartUI {
 
     /* main function - entry point in programm */
     public static void main(String[] args) {
-        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker(), System.out::println).init();
     }
 }
