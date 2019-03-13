@@ -29,4 +29,40 @@ public class ProfilesTest {
                 is(true)
         );
     }
+
+    @Test
+    public void whenRepeatedProfilesThanUniqueAddresses() {
+        List<Address> expectedList = new ArrayList<>();
+        expectedList.add(new Address("Moscow", "Stalevarov", 10, 101));
+        expectedList.add(new Address("Moscow", "Perovskaya", 23, 87));
+        expectedList.add(new Address("Saratov", "Chapaeva", 60, 15));
+        List<Profile> profilesList = new ArrayList<>();
+        profilesList.add(new Profile(new Address("Moscow", "Stalevarov", 10, 101)));
+        profilesList.add(new Profile(new Address("Moscow", "Perovskaya", 23, 87)));
+        profilesList.add(new Profile(new Address("Saratov", "Chapaeva", 60, 15)));
+        profilesList.add(new Profile(new Address("Moscow", "Stalevarov", 10, 101)));
+        profilesList.add(new Profile(new Address("Moscow", "Perovskaya", 23, 87)));
+        assertThat(
+                new Profiles().collect(profilesList).equals(expectedList),
+                is(true)
+        );
+    }
+
+    @Test
+    public void when4ProfilesThan4AddressesSortedByCities() {
+        List<Address> expectedList = new ArrayList<>();
+        expectedList.add(new Address("Moscow", "Stalevarov", 10, 101));
+        expectedList.add(new Address("Moscow", "Perovskaya", 23, 87));
+        expectedList.add(new Address("Saratov", "Chapaeva", 60, 15));
+        expectedList.add(new Address("Vladimir", "Streleckaya", 12, 0));
+        List<Profile> profilesList = new ArrayList<>();
+        profilesList.add(new Profile(new Address("Saratov", "Chapaeva", 60, 15)));
+        profilesList.add(new Profile(new Address("Moscow", "Stalevarov", 10, 101)));
+        profilesList.add(new Profile(new Address("Vladimir", "Streleckaya", 12, 0)));
+        profilesList.add(new Profile(new Address("Moscow", "Perovskaya", 23, 87)));
+        assertThat(
+                new Profiles().collect(profilesList).equals(expectedList),
+                is(true)
+        );
+    }
 }

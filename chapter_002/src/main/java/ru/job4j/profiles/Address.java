@@ -45,6 +45,14 @@ public class Address {
     }
 
     /**
+     * Get-method
+     * @return - city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
      * Override method equals(Object o)
      * @param o - compared object
      * @return - result of comparison
