@@ -12,6 +12,19 @@ public class Student {
     /** Student`s score (marks level) */
     private int score;
 
+    /** Student`s surname */
+    private String surname;
+
+    /**
+     * Constructor
+     * @param surname - Student`s surname
+     * @param score - Student`s score
+     */
+    public Student(String surname, int score) {
+        this.score = score;
+        this.surname = surname;
+    }
+
     /**
      * Constructor
      * @param score - Student`s score
@@ -26,6 +39,14 @@ public class Student {
      */
     public int getScore() {
         return this.score;
+    }
+
+    /**
+     * Get-method
+     * @return - Student`s surname
+     */
+    public String getSurname() {
+        return surname;
     }
 
     /**
