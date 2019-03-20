@@ -2,6 +2,7 @@ package ru.job4j.bank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.TreeMap;
 
 /**
@@ -102,13 +103,10 @@ public class Bank {
      * If no any Users was found the method returns null.
      */
     private User getUserFromStorage(String passport) {
-        User result = null;
-        for (User user : this.usersStorage.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                result = user;
-            }
-        }
-        return result;
+        return this.usersStorage.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -119,16 +117,9 @@ public class Bank {
      * @return - founded Account or null if Account was not found
      */
     private Account getAccount(String passport, String requisites) {
-        Account resAccount = null;
-        List<Account> list = this.getUserAccounts(passport);
-        if (list != null) {
-            for (Account acc : list) {
-                if (acc.getRequisites().equals(requisites)) {
-                    resAccount = acc;
-                    break;
-                }
-            }
-        }
-        return resAccount;
+        return this.getUserAccounts(passport).stream()
+                .filter(account -> account.getRequisites().equals(requisites))
+                .findFirst()
+                .orElse(null);
     }
 }
