@@ -1,9 +1,9 @@
 package ru.job4j.school;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * School - class intended for operations at students, classes etc.
@@ -29,5 +29,23 @@ public class School {
      */
     public Map<String, Student> toMap(List<Student> students) {
         return students.stream().collect(Collectors.toMap(Student::getSurname, (Student s) -> s));
+    }
+
+    /**
+     * The method filtered students list in accordance to their score level.
+     * @param students - list of students
+     * @param bound - low score bound
+     * @return - list of students that have score greater bound.
+     */
+    public List<Student> levelOf(List<Student> students, int bound) {
+        return students.stream().flatMap(Stream::ofNullable)
+                .sorted(new Comparator<Student>() {
+                    @Override
+                    public int compare(Student o1, Student o2) {
+                        return -Integer.compare(o1.getScore(), o2.getScore());
+                    }
+                })
+                .takeWhile(student -> student.getScore() > bound)
+                .collect(Collectors.toList());
     }
 }

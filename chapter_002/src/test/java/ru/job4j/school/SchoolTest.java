@@ -76,4 +76,22 @@ public class SchoolTest {
                 is(true)
         );
     }
+
+    @Test
+    public void studentsSortByScore() {
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(new Student("Sidorov", 66));
+        studentList.add(null);
+        studentList.add(new Student("Ivanov", 56));
+        studentList.add(null);
+        studentList.add(new Student("Petrov", 84));
+        studentList.add(new Student("Sinicina", 92));
+        List<Student> expectedList = new ArrayList<>();
+        expectedList.add(new Student("Sinicina", 92));
+        expectedList.add(new Student("Petrov", 84));
+        assertThat(
+                new School().levelOf(studentList, 80).equals(expectedList),
+                is(true)
+        );
+    }
 }
