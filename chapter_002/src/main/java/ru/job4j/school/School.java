@@ -48,4 +48,5 @@ public class School {
                 .takeWhile(student -> student.getScore() > bound)
                 .collect(Collectors.toList());
     }
+    //для travis
 }
