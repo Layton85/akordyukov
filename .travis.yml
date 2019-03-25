@@ -16,6 +16,3 @@ notifications:
       - alex-programm@yandex.ru
     on_success: never # default: change
     on_failure: always # default: always
-
-# добавлено при переходе с jdk8 на openjdk11
-jdk: - openjdk11
