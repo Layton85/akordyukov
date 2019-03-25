@@ -1,9 +1,6 @@
 # используем язык java. Travis CI поддерживает другие языки тоже.
 language: java
 
-# добавлено при переходе с jdk8 на openjdk11
-jdk: - openjdk11
-
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
 
@@ -19,3 +16,6 @@ notifications:
       - alex-programm@yandex.ru
     on_success: never # default: change
     on_failure: always # default: always
+
+# добавлено при переходе с jdk8 на openjdk11
+jdk: - openjdk11
