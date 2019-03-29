@@ -74,16 +74,16 @@ public class SortUserTest {
     }
 
     @Test
-    public void whenTwoUsersWithEqualAgeThenTwoUsersSortedByAppearanceInTreeSet() {
-        List<User> users = new ArrayList<User>();
+    public void whenTwoUsersWithEqualAgeThenReturnedInSetOnlyFirstUser() {
+        List<User> users = new ArrayList<>();
         users.add(new User("Jim", 30));
         users.add(new User("Vlad", 30));
         Set<User> tree = new TreeSet<>(new SortUser().sort(users));
         Set<User> expected = new TreeSet<>();
         expected.add(new User("Jim", 30));
-        expected.add(new User("Vlad", 30));
         assertThat(expected.equals(tree), is(true));
     }
+
 
     @Test
     public void whenThreeUsersWithDifferentNamesThenSortedByNameLength() {

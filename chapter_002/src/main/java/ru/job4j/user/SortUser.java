@@ -12,7 +12,7 @@ import java.util.*;
 public class SortUser {
     /**
      * The method sorting the list of Users according to the used comparator.
-     * @return sorted TreeSet producted from User List.
+     * @return sorted TreeSet produced from User List.
      */
     public Set<User> sort(List<User> users) {
         return new TreeSet<User>(users);
