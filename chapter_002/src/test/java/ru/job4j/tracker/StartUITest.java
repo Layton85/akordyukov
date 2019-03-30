@@ -358,7 +358,6 @@ public class StartUITest {
         tracker.add(item1);
         Item item2 = new Item("test", "desc2", 124L);
         tracker.add(item2);
-
         Input input = new StubInput(Arrays.asList("5", "test", "6", "y"));
         StartUI startUI = new StartUI(input, tracker, this.output);
         startUI.init();

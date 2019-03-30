@@ -18,7 +18,7 @@ public class FunctionTest {
     public void whenLinearFunctionThenLinearResults() {
         Function function = new Function();
         List<Double> result = function.diapason(5, 8, x -> 2 * x + 1);
-        List<Double> expected = Arrays.asList(11D, 13D, 15D);
+        List<Double> expected = List.of(11D, 13D, 15D);
         assertThat(result, is(expected));
     }
 
@@ -26,7 +26,7 @@ public class FunctionTest {
     public void whenQuadraticFunctionThenQuadraticResults() {
         Function function = new Function();
         List<Double> result = function.diapason(5, 8, x -> Math.pow(x, 2) + 1);
-        List<Double> expected = Arrays.asList(26D, 37D, 50D);
+        List<Double> expected = List.of(26D, 37D, 50D);
         assertThat(result, is(expected));
     }
 
@@ -35,7 +35,7 @@ public class FunctionTest {
         Function function = new Function();
         final
         List<Double> result = function.diapason(100, 102, x -> Math.log10(x) + 1);
-        List<Double> expected = Arrays.asList(3D, Math.log10(101) + 1);
+        List<Double> expected = List.of(3D, Math.log10(101) + 1);
         assertThat(result, is(expected));
     }
 }

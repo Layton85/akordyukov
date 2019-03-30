@@ -1,7 +1,6 @@
 package ru.job4j.profiles;
 
 import org.junit.Test;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -16,14 +15,16 @@ import static org.junit.Assert.*;
 public class ProfilesTest {
     @Test
     public void when3ProfilesThan3Addresses() {
-        List<Address> expectedList = new ArrayList<>();
-        expectedList.add(new Address("Moscow", "Stalevarov", 10, 101));
-        expectedList.add(new Address("Moscow", "Perovskaya", 23, 87));
-        expectedList.add(new Address("Saratov", "Chapaeva", 60, 15));
-        List<Profile> profilesList = new ArrayList<>();
-        profilesList.add(new Profile(new Address("Moscow", "Stalevarov", 10, 101)));
-        profilesList.add(new Profile(new Address("Moscow", "Perovskaya", 23, 87)));
-        profilesList.add(new Profile(new Address("Saratov", "Chapaeva", 60, 15)));
+        List<Address> expectedList = List.of(
+                new Address("Moscow", "Stalevarov", 10, 101),
+                new Address("Moscow", "Perovskaya", 23, 87),
+                new Address("Saratov", "Chapaeva", 60, 15)
+        );
+        List<Profile> profilesList = List.of(
+                new Profile(new Address("Moscow", "Stalevarov", 10, 101)),
+                new Profile(new Address("Moscow", "Perovskaya", 23, 87)),
+                new Profile(new Address("Saratov", "Chapaeva", 60, 15))
+        );
         assertThat(
                 new Profiles().collect(profilesList).equals(expectedList),
                 is(true)
@@ -32,16 +33,18 @@ public class ProfilesTest {
 
     @Test
     public void whenRepeatedProfilesThanUniqueAddresses() {
-        List<Address> expectedList = new ArrayList<>();
-        expectedList.add(new Address("Moscow", "Stalevarov", 10, 101));
-        expectedList.add(new Address("Moscow", "Perovskaya", 23, 87));
-        expectedList.add(new Address("Saratov", "Chapaeva", 60, 15));
-        List<Profile> profilesList = new ArrayList<>();
-        profilesList.add(new Profile(new Address("Moscow", "Stalevarov", 10, 101)));
-        profilesList.add(new Profile(new Address("Moscow", "Perovskaya", 23, 87)));
-        profilesList.add(new Profile(new Address("Saratov", "Chapaeva", 60, 15)));
-        profilesList.add(new Profile(new Address("Moscow", "Stalevarov", 10, 101)));
-        profilesList.add(new Profile(new Address("Moscow", "Perovskaya", 23, 87)));
+        List<Address> expectedList = List.of(
+                new Address("Moscow", "Stalevarov", 10, 101),
+                new Address("Moscow", "Perovskaya", 23, 87),
+                new Address("Saratov", "Chapaeva", 60, 15)
+        );
+        List<Profile> profilesList = List.of(
+                new Profile(new Address("Moscow", "Stalevarov", 10, 101)),
+                new Profile(new Address("Moscow", "Perovskaya", 23, 87)),
+                new Profile(new Address("Saratov", "Chapaeva", 60, 15)),
+                new Profile(new Address("Moscow", "Stalevarov", 10, 101)),
+                new Profile(new Address("Moscow", "Perovskaya", 23, 87))
+        );
         assertThat(
                 new Profiles().collect(profilesList).equals(expectedList),
                 is(true)
@@ -50,16 +53,18 @@ public class ProfilesTest {
 
     @Test
     public void when4ProfilesThan4AddressesSortedByCities() {
-        List<Address> expectedList = new ArrayList<>();
-        expectedList.add(new Address("Moscow", "Stalevarov", 10, 101));
-        expectedList.add(new Address("Moscow", "Perovskaya", 23, 87));
-        expectedList.add(new Address("Saratov", "Chapaeva", 60, 15));
-        expectedList.add(new Address("Vladimir", "Streleckaya", 12, 0));
-        List<Profile> profilesList = new ArrayList<>();
-        profilesList.add(new Profile(new Address("Saratov", "Chapaeva", 60, 15)));
-        profilesList.add(new Profile(new Address("Moscow", "Stalevarov", 10, 101)));
-        profilesList.add(new Profile(new Address("Vladimir", "Streleckaya", 12, 0)));
-        profilesList.add(new Profile(new Address("Moscow", "Perovskaya", 23, 87)));
+        List<Address> expectedList = List.of(
+                new Address("Moscow", "Stalevarov", 10, 101),
+                new Address("Moscow", "Perovskaya", 23, 87),
+                new Address("Saratov", "Chapaeva", 60, 15),
+                new Address("Vladimir", "Streleckaya", 12, 0)
+        );
+        List<Profile> profilesList = List.of(
+                new Profile(new Address("Saratov", "Chapaeva", 60, 15)),
+                new Profile(new Address("Moscow", "Stalevarov", 10, 101)),
+                new Profile(new Address("Vladimir", "Streleckaya", 12, 0)),
+                new Profile(new Address("Moscow", "Perovskaya", 23, 87))
+        );
         assertThat(
                 new Profiles().collect(profilesList).equals(expectedList),
                 is(true)

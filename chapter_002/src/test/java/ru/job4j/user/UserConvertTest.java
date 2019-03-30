@@ -2,9 +2,9 @@ package ru.job4j.user;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -19,7 +19,7 @@ public class UserConvertTest {
     @Test
     public void when0UsersInListThen0UsersInHashMap() {
         UserConvert converter = new UserConvert();
-        List<User> list = new ArrayList<>();
+        List<User> list = List.of();
         HashMap<Integer, User> resultMap = converter.process(list);
         assertThat(resultMap.isEmpty(), is(true));
     }
@@ -27,8 +27,7 @@ public class UserConvertTest {
     @Test
     public void when1UserInListThen1UserInHashMap() {
         UserConvert converter = new UserConvert();
-        List<User> list = new ArrayList<>();
-        list.add(new User(1, "Nicky", "Boston"));
+        List<User> list = List.of(new User(1, "Nicky", "Boston"));
         HashMap<Integer, User> resultMap = converter.process(list);
         HashMap<Integer, User> expectedMap = new HashMap<>();
         expectedMap.put(1, new User(1, "Nicky", "Boston"));
@@ -38,9 +37,10 @@ public class UserConvertTest {
     @Test
     public void when2UsersInListThen2UsersInHashMap() {
         UserConvert converter = new UserConvert();
-        List<User> list = new ArrayList<>();
-        list.add(new User(1, "Nicky", "Boston"));
-        list.add(new User(2, "Lucas", "Warsaw"));
+        List<User> list = List.of(
+                new User(1, "Nicky", "Boston"),
+                new User(2, "Lucas", "Warsaw")
+        );
         HashMap<Integer, User> resultMap = converter.process(list);
         HashMap<Integer, User> expectedMap = new HashMap<>();
         expectedMap.put(1, new User(1, "Nicky", "Boston"));
@@ -51,10 +51,11 @@ public class UserConvertTest {
     @Test
     public void when3UsersWithDisorderedKeysInListThen3UsersInHashMap() {
         UserConvert converter = new UserConvert();
-        List<User> list = new ArrayList<>();
-        list.add(new User(-100, "Nicky", "Boston"));
-        list.add(new User(99, "Lucas", "Warsaw"));
-        list.add(new User(0, "Li", "Beijing"));
+        List<User> list = List.of(
+                new User(-100, "Nicky", "Boston"),
+                new User(99, "Lucas", "Warsaw"),
+                new User(0, "Li", "Beijing")
+        );
         HashMap<Integer, User> resultMap = converter.process(list);
         HashMap<Integer, User> expectedMap = new HashMap<>();
         expectedMap.put(-100, new User(-100, "Nicky", "Boston"));

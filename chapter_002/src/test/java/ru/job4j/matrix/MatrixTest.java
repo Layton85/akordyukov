@@ -19,7 +19,7 @@ public class MatrixTest {
             {3, 4},
             {5, 6}
         };
-        List<Integer> expectedList = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> expectedList = List.of(1, 2, 3, 4, 5, 6);
         assertThat(
                 new Matrix().matrixToList(matrix).equals(expectedList),
                 is(true)

@@ -2,7 +2,6 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -52,10 +51,11 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        List<Item> expected = new ArrayList<>();
-        expected.add(new Item("test2", "testDescription2", 124L));
+        List<Item> expected = List.of(
+                new Item("test2", "testDescription2", 124L),
+                new Item("test3", "testDescription3", 125L)
+        );
         expected.get(0).setId(tracker.getAll().get(1).getId());
-        expected.add(new Item("test3", "testDescription3", 125L));
         expected.get(1).setId(tracker.getAll().get(2).getId());
         tracker.delete(tracker.getAll().get(0).getId());
         assertThat(expected.equals(tracker.getAll()), is(true));
@@ -70,10 +70,11 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        List<Item> expected = new ArrayList<>();
-        expected.add(new Item("test1", "testDescription1", 123L));
+        List<Item> expected = List.of(
+                new Item("test1", "testDescription1", 123L),
+                new Item("test3", "testDescription3", 125L)
+        );
         expected.get(0).setId(tracker.getAll().get(0).getId());
-        expected.add(new Item("test3", "testDescription3", 125L));
         expected.get(1).setId(tracker.getAll().get(2).getId());
         tracker.delete(tracker.getAll().get(1).getId());
         assertThat(expected.equals(tracker.getAll()), is(true));
@@ -88,10 +89,11 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        List<Item> expected = new ArrayList<>();
-        expected.add(new Item("test1", "testDescription1", 123L));
+        List<Item> expected = List.of(
+                new Item("test1", "testDescription1", 123L),
+                new Item("test2", "testDescription2", 124L)
+        );
         expected.get(0).setId(tracker.getAll().get(0).getId());
-        expected.add(new Item("test2", "testDescription2", 124L));
         expected.get(1).setId(tracker.getAll().get(1).getId());
         tracker.delete(tracker.getAll().get(2).getId());
         assertThat(expected.equals(tracker.getAll()), is(true));
@@ -100,7 +102,7 @@ public class TrackerTest {
     @Test
     public void whenGetAllItemsThenTrackerGivesNoAnyItems() {
         Tracker tracker = new Tracker();
-        List<Item> nothing = new ArrayList<>();
+        List<Item> nothing = List.of();
         assertThat(nothing.equals(tracker.getAll()), is(true));
     }
 
@@ -109,8 +111,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription1", 123L);
         tracker.add(item);
-        List<Item> expected = new ArrayList<>();
-        expected.add(new Item("test1", "testDescription1", 123L));
+        List<Item> expected = List.of(new Item("test1", "testDescription1", 123L));
         expected.get(0).setId(tracker.getAll().get(0).getId());
         assertThat(expected.equals(tracker.getAll()), is(true));
     }
@@ -122,10 +123,11 @@ public class TrackerTest {
         Item item2 = new Item("test2", "testDescription2", 124L);
         tracker.add(item1);
         tracker.add(item2);
-        List<Item> expected = new ArrayList<>();
-        expected.add(new Item("test1", "testDescription1", 123L));
+        List<Item> expected = List.of(
+                new Item("test1", "testDescription1", 123L),
+                new Item("test2", "testDescription2", 124L)
+        );
         expected.get(0).setId(tracker.getAll().get(0).getId());
-        expected.add(new Item("test2", "testDescription2", 124L));
         expected.get(1).setId(tracker.getAll().get(1).getId());
         assertThat(expected.equals(tracker.getAll()), is(true));
     }
@@ -139,8 +141,7 @@ public class TrackerTest {
         tracker.add(item2);
         Item item3 = new Item("test3", "testDescription3", 125L);
         tracker.add(item3);
-        List<Item> expected = new ArrayList<>();
-        expected.add(new Item("test2", "testDescription2", 124L));
+        List<Item> expected = List.of(new Item("test2", "testDescription2", 124L));
         expected.get(0).setId(tracker.getAll().get(1).getId());
         assertThat(expected.equals(tracker.findByName("test2")), is(true));
     }
@@ -154,7 +155,7 @@ public class TrackerTest {
         tracker.add(item2);
         Item item3 = new Item("test3", "testDescription3", 125L);
         tracker.add(item3);
-        List<Item> expected = new ArrayList<>();
+        List<Item> expected = List.of();
         assertThat(expected.equals(tracker.findByName("qwerty")), is(true));
     }
 
@@ -167,10 +168,11 @@ public class TrackerTest {
         tracker.add(item2);
         Item item3 = new Item("test3", "testDescription3", 125L);
         tracker.add(item3);
-        List<Item> expected = new ArrayList<>();
-        expected.add(new Item("test", "testDescription1", 123L));
+        List<Item> expected = List.of(
+                new Item("test", "testDescription1", 123L),
+                new Item("test", "testDescription2", 124L)
+        );
         expected.get(0).setId(tracker.getAll().get(0).getId());
-        expected.add(new Item("test", "testDescription2", 124L));
         expected.get(1).setId(tracker.getAll().get(1).getId());
         assertThat(expected.equals(tracker.findByName("test")), is(true));
     }
@@ -184,10 +186,11 @@ public class TrackerTest {
         tracker.add(item2);
         Item item3 = new Item("test", "testDescription3", 125L);
         tracker.add(item3);
-        List<Item> expected = new ArrayList<>();
-        expected.add(new Item("test", "testDescription2", 124L));
+        List<Item> expected = List.of(
+                new Item("test", "testDescription2", 124L),
+                new Item("test", "testDescription3", 125L)
+        );
         expected.get(0).setId(tracker.getAll().get(1).getId());
-        expected.add(new Item("test", "testDescription3", 125L));
         expected.get(1).setId(tracker.getAll().get(2).getId());
         assertThat(expected.equals(tracker.findByName("test")), is(true));
     }
@@ -201,12 +204,13 @@ public class TrackerTest {
         tracker.add(item2);
         Item item3 = new Item("test", "testDescription3", 125L);
         tracker.add(item3);
-        List<Item> expected = new ArrayList<>();
-        expected.add(new Item("test", "testDescription1", 123L));
+        List<Item> expected = List.of(
+                new Item("test", "testDescription1", 123L),
+                new Item("test", "testDescription2", 124L),
+                new Item("test", "testDescription3", 125L)
+        );
         expected.get(0).setId(tracker.getAll().get(0).getId());
-        expected.add(new Item("test", "testDescription2", 124L));
         expected.get(1).setId(tracker.getAll().get(1).getId());
-        expected.add(new Item("test", "testDescription3", 125L));
         expected.get(2).setId(tracker.getAll().get(2).getId());
         assertThat(expected.equals(tracker.findByName("test")), is(true));
     }

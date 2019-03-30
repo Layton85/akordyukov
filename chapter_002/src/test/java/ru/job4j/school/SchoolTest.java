@@ -2,7 +2,6 @@ package ru.job4j.school;
 
 import org.junit.Test;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,14 +62,16 @@ public class SchoolTest {
 
     @Test
     public void studentsListToMap() {
-        List<Student> studentList = new ArrayList<>();
-        studentList.add(new Student("Sidorov", 66));
-        studentList.add(new Student("Ivanov", 56));
-        studentList.add(new Student("Petrov", 84));
-        Map<String, Student> expectedMap = new HashMap<>();
-        expectedMap.put("Sidorov", new Student("Sidorov", 66));
-        expectedMap.put("Ivanov", new Student("Ivanov", 56));
-        expectedMap.put("Petrov", new Student("Petrov", 84));
+        List<Student> studentList = List.of(
+                new Student("Sidorov", 66),
+                new Student("Ivanov", 56),
+                new Student("Petrov", 84)
+        );
+        Map<String, Student> expectedMap = Map.of(
+                "Sidorov", new Student("Sidorov", 66),
+                "Ivanov", new Student("Ivanov", 56),
+                "Petrov", new Student("Petrov", 84)
+        );
         assertThat(
                 new School().toMap(studentList).equals(expectedMap),
                 is(true)
@@ -86,9 +87,10 @@ public class SchoolTest {
         studentList.add(null);
         studentList.add(new Student("Petrov", 84));
         studentList.add(new Student("Sinicina", 92));
-        List<Student> expectedList = new ArrayList<>();
-        expectedList.add(new Student("Sinicina", 92));
-        expectedList.add(new Student("Petrov", 84));
+        List<Student> expectedList = List.of(
+                new Student("Sinicina", 92),
+                new Student("Petrov", 84)
+        );
         assertThat(
                 new School().levelOf(studentList, 80).equals(expectedList),
                 is(true)

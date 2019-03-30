@@ -2,7 +2,6 @@ package ru.job4j.bank;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -52,7 +51,7 @@ public class BankTest {
     public void whenDeleteUser() {
         Bank bank = this.prepareBank();
         bank.deleteUser(new User("Alex", "333222"));
-        List<Account> expectedList = new ArrayList<>();
+        List<Account> expectedList = List.of();
         assertThat(bank.getUserAccounts("333222").equals(expectedList), is(true));
     }
 
@@ -84,8 +83,7 @@ public class BankTest {
         Bank bank = new Bank();
         bank.addUser(user);
         bank.addAccountToUser("333222", new Account(0, "111000"));
-        List<Account> expectedList = new ArrayList<>();
-        expectedList.add(new Account(0, "111000"));
+        List<Account> expectedList = List.of(new Account(0, "111000"));
         List<Account> resultList = bank.getUserAccounts("333222");
         assertThat(resultList != null && resultList.equals(expectedList), is(true));
     }
@@ -93,7 +91,7 @@ public class BankTest {
     @Test
     public void whenGetUserAccountsThenReturnsEmptyListBecauseOfUserWasNotFoundInTheStorage() {
         Bank bank = new Bank();
-        List<Account> expectedList = new ArrayList<>();
+        List<Account> expectedList = List.of();
         List<Account> resultList = bank.getUserAccounts("333222");
         assertThat(resultList != null && resultList.equals(expectedList), is(true));
     }

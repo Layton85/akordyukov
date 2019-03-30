@@ -29,37 +29,39 @@ public class DepartmentSortTest {
                 "K2\\SK1\\SSK1",
                 "K2\\SK1\\SSK2"
         };
-        TreeSet<String> inputTree = new TreeSet<>(Arrays.asList(input));
+        TreeSet<String> inputTree = new TreeSet<>(List.of(input));
         return new DepartmentSort(inputTree);
     }
 
     @Test
     public void ascendingOrderSort() {
-        List<String> expected = new ArrayList<>();
-        expected.add("K1");
-        expected.add("K1\\SK1");
-        expected.add("K1\\SK1\\SSK1");
-        expected.add("K1\\SK1\\SSK2");
-        expected.add("K1\\SK2");
-        expected.add("K2");
-        expected.add("K2\\SK1");
-        expected.add("K2\\SK1\\SSK1");
-        expected.add("K2\\SK1\\SSK2");
+        List<String> expected = List.of(
+                "K1",
+                "K1\\SK1",
+                "K1\\SK1\\SSK1",
+                "K1\\SK1\\SSK2",
+                "K1\\SK2",
+                "K2",
+                "K2\\SK1",
+                "K2\\SK1\\SSK1",
+                "K2\\SK1\\SSK2"
+        );
         assertThat(prepareData().ascendingSort(), is(expected));
     }
 
     @Test
     public void descendingOrderSort() {
-        List<String> expected = new ArrayList<>();
-        expected.add("K2");
-        expected.add("K2\\SK1");
-        expected.add("K2\\SK1\\SSK2");
-        expected.add("K2\\SK1\\SSK1");
-        expected.add("K1");
-        expected.add("K1\\SK2");
-        expected.add("K1\\SK1");
-        expected.add("K1\\SK1\\SSK2");
-        expected.add("K1\\SK1\\SSK1");
+        List<String> expected = List.of(
+                "K2",
+                "K2\\SK1",
+                "K2\\SK1\\SSK2",
+                "K2\\SK1\\SSK1",
+                "K1",
+                "K1\\SK2",
+                "K1\\SK1",
+                "K1\\SK1\\SSK2",
+                "K1\\SK1\\SSK1"
+        );
         assertThat(prepareData().descendingSort(), is(expected));
     }
 }

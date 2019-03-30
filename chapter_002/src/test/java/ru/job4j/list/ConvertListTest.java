@@ -3,7 +3,6 @@ package ru.job4j.list;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -22,7 +21,7 @@ public class ConvertListTest {
         list.add(new int[]{1, 2});
         list.add(new int[]{3, 4, 5, 6});
         List<Integer> result = new ConvertList().convert(list);
-        List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> expected = List.of(1, 2, 3, 4, 5, 6);
         assertThat(result, is(expected));
     }
 
@@ -32,7 +31,7 @@ public class ConvertListTest {
         list.add(new int[]{1, 2});
         list.add(new int[]{3, 4});
         List<Integer> result = new ConvertList().convert(list);
-        List<Integer> expected = Arrays.asList(1, 2, 3, 4);
+        List<Integer> expected = List.of(1, 2, 3, 4);
         assertThat(result, is(expected));
     }
 
@@ -41,7 +40,7 @@ public class ConvertListTest {
         List<int[]> list = new ArrayList<>();
         list.add(new int[]{1, 2});
         List<Integer> result = new ConvertList().convert(list);
-        List<Integer> expected = Arrays.asList(1, 2);
+        List<Integer> expected = List.of(1, 2);
         assertThat(result, is(expected));
     }
 
@@ -49,7 +48,7 @@ public class ConvertListTest {
     public void when0ArraysThenEmptyList() {
         List<int[]> list = new ArrayList<>();
         List<Integer> result = new ConvertList().convert(list);
-        List<Integer> expected = new ArrayList<>();
+        List<Integer> expected = List.of();
         assertThat(result, is(expected));
     }
 }

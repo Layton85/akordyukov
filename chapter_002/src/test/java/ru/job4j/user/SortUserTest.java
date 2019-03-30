@@ -30,8 +30,9 @@ public class SortUserTest {
         List<User> users = new ArrayList<User>();
         users.add(new User("Maria", 21));
         Set<User> tree = new TreeSet<>(new SortUser().sort(users));
-        Set<User> expected = new TreeSet<>();
-        expected.add(new User("Maria", 21));
+        Set<User> expected = Set.of(
+                new User("Maria", 21)
+        );
         assertThat(expected.equals(tree), is(true));
     }
 
@@ -41,9 +42,10 @@ public class SortUserTest {
         users.add(new User("Maria", 21));
         users.add(new User("Ivan", 27));
         Set<User> tree = new TreeSet<>(new SortUser().sort(users));
-        Set<User> expected = new TreeSet<>();
-        expected.add(new User("Maria", 21));
-        expected.add(new User("Ivan", 27));
+        Set<User> expected = Set.of(
+                new User("Maria", 21),
+                new User("Ivan", 27)
+        );
         assertThat(expected.equals(tree), is(true));
     }
 
@@ -53,9 +55,10 @@ public class SortUserTest {
         users.add(new User("Ivan", 27));
         users.add(new User("Maria", 21));
         Set<User> tree = new TreeSet<>(new SortUser().sort(users));
-        Set<User> expected = new TreeSet<>();
-        expected.add(new User("Maria", 21));
-        expected.add(new User("Ivan", 27));
+        Set<User> expected = Set.of(
+                new User("Maria", 21),
+                new User("Ivan", 27)
+        );
         assertThat(expected.equals(tree), is(true));
     }
 
@@ -66,10 +69,11 @@ public class SortUserTest {
         users.add(new User("Maria", 21));
         users.add(new User("Nick", 32));
         Set<User> tree = new TreeSet<>(new SortUser().sort(users));
-        Set<User> expected = new TreeSet<>();
-        expected.add(new User("Maria", 21));
-        expected.add(new User("Ivan", 27));
-        expected.add(new User("Nick", 32));
+        Set<User> expected = Set.of(
+                new User("Maria", 21),
+                new User("Ivan", 27),
+                new User("Nick", 32)
+        );
         assertThat(expected.equals(tree), is(true));
     }
 
@@ -79,11 +83,11 @@ public class SortUserTest {
         users.add(new User("Jim", 30));
         users.add(new User("Vlad", 30));
         Set<User> tree = new TreeSet<>(new SortUser().sort(users));
-        Set<User> expected = new TreeSet<>();
-        expected.add(new User("Jim", 30));
+        Set<User> expected = Set.of(
+                new User("Jim", 30)
+        );
         assertThat(expected.equals(tree), is(true));
     }
-
 
     @Test
     public void whenThreeUsersWithDifferentNamesThenSortedByNameLength() {
@@ -92,10 +96,11 @@ public class SortUserTest {
         users.add(new User("Jim"));
         users.add(new User("Vlad"));
         new SortUser().sortNameLength(users);
-        List<User> expected = new ArrayList<>();
-        expected.add(new User("Jim"));
-        expected.add(new User("Vlad"));
-        expected.add(new User("Karina"));
+        List<User> expected = List.of(
+                new User("Jim"),
+                new User("Vlad"),
+                new User("Karina")
+        );
         assertThat(expected.equals(users), is(true));
     }
 
@@ -107,11 +112,12 @@ public class SortUserTest {
         users.add(new User("Sergey", 20));
         users.add(new User("Ivan", 25));
         new SortUser().sortByAllFields(users);
-        List<User> expected = new ArrayList<>();
-        expected.add(new User("Ivan", 25));
-        expected.add(new User("Ivan", 30));
-        expected.add(new User("Sergey", 20));
-        expected.add(new User("Sergey", 25));
+        List<User> expected = List.of(
+                new User("Ivan", 25),
+                new User("Ivan", 30),
+                new User("Sergey", 20),
+                new User("Sergey", 25)
+        );
         assertThat(expected.equals(users), is(true));
     }
 }
