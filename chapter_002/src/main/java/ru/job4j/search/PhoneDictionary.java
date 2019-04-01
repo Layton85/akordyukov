@@ -28,8 +28,8 @@ public class PhoneDictionary {
      * @return The list of the users meeting conditions.
      */
     public List<Person> find(String key) { //Поиск мы должны осуществлять по всем полям через метод String.contains.
-        List<Person> result = new ArrayList<>();
-        for (Person person : this.persons) {
+        var result = new ArrayList<Person>();
+        for (var person : this.persons) {
             if (person.getName().contains(key)) {
                 result.add(person);
             } else if (person.getSurname().contains(key)) {

@@ -3,8 +3,6 @@ package ru.job4j.search;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -18,17 +16,17 @@ import static org.junit.Assert.*;
 public class PhoneDictionaryTest {
     @Test
     public void whenFindByName() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
-        List<Person> persons = phones.find("Petr");
+        var persons = phones.find("Petr");
         assertThat(persons.iterator().next().getSurname(), is("Arsentev"));
     }
 
     @Test
     public void whenFindBySequenceThen2Occurrences() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
@@ -38,12 +36,12 @@ public class PhoneDictionaryTest {
         phones.add(
                 new Person("Sergey", "Ivanov", "715471", "Moscow")
         );
-        List<Person> persons = phones.find("sk");
-        List<String> founded = new ArrayList<>();
-        for (Iterator<Person> it = persons.iterator(); it.hasNext();) {
+        var persons = phones.find("sk");
+        var founded = new ArrayList<String>();
+        for (var it = persons.iterator(); it.hasNext();) {
             founded.add(it.next().getSurname());
         }
-        String[] result = new String[founded.size()];
+        var result = new String[founded.size()];
         result = founded.toArray(result);
         assertArrayEquals(new String[] {"Arsentev", "Andreev"}, result);
     }
