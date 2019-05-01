@@ -1,5 +1,6 @@
 package ru.job4j.list;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,21 +19,12 @@ public class Abuse {
      */
     public List<String> clean(List<String> words, List<String> filthy) {
         return words.stream()
-                .map((word) -> {
-                    StringBuffer cleaned = new StringBuffer(word);
-                    filthy.stream().forEach((badWord) -> {
-                        int index = cleaned.indexOf(badWord);
-                        while (index != -1) {
-                            int length = badWord.length();
-                            if (cleaned.charAt(index - 1) == ' ') {
-                                index--;
-                                length++;
-                            }
-                            cleaned.replace(index, index + length, "");
-                            index = cleaned.indexOf(badWord);
-                        }
+                .flatMap(word -> Arrays.stream(word.split(" ")))
+                .filter((word) -> {
+                    return !filthy.stream().anyMatch(badWord -> {
+                        return word.contains(badWord);
                     });
-                    return cleaned.toString();
-                }).collect(Collectors.toList());
+                })
+                .collect(Collectors.toList());
     }
 }
