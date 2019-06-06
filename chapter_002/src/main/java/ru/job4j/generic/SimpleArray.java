@@ -21,7 +21,7 @@ public class SimpleArray<T> implements Iterable<T> {
     int size = 0;
 
     /**
-     * Constructr
+     * Constructor
      * @param size - array`s size.
      */
     public SimpleArray(int size) {
