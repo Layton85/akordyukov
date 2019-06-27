@@ -27,4 +27,14 @@ public class SimpleStack<T> {
     public void push(T value) {
         this.list.add(value);
     }
+
+    /**
+     * The method shows that the stack is empty or not.
+     * @return - boolean result:
+     *              false - stack is empty
+     *              true - stack is not empty
+     */
+    public boolean empty() {
+        return this.list.getSize() == 0;
+    }
 }
