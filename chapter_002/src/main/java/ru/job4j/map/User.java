@@ -1,6 +1,6 @@
 package ru.job4j.map;
 
-import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * User - class shows the model of User.
@@ -16,7 +16,7 @@ public class User {
     private int children;
 
     /** birthday data */
-    private Calendar birthday;
+    private GregorianCalendar birthday;
 
     /**
      * Constructor
@@ -24,7 +24,7 @@ public class User {
      * @param children - the number of childrens
      * @param birthday - birthday data
      */
-    public User(String name, int children, Calendar birthday) {
+    public User(String name, int children, GregorianCalendar birthday) {
         this.name = name;
         this.children = children;
         this.birthday = birthday;
@@ -50,7 +50,19 @@ public class User {
      * Get-method
      * @return - birthday data
      */
-    public Calendar getBirthday() {
+    public GregorianCalendar getBirthday() {
         return birthday;
+    }
+
+    /**
+     * Overridden method hashCode().
+     * @return - User`s hash code.
+     */
+    @Override
+    public int hashCode() {
+        int result = this.name != null ? this.name.hashCode() : 0;
+        result = 31 * result + Integer.hashCode(this.children);
+        result = 31 * result + (this.birthday != null ? this.birthday.hashCode() : 0);
+        return result;
     }
 }
