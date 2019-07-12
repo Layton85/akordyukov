@@ -1,5 +1,6 @@
 package ru.job4j.map;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -54,15 +55,30 @@ public class User {
         return birthday;
     }
 
+//    /**
+//     * Overridden method hashCode().
+//     * @return - User`s hash code.
+//     */
+//    @Override
+//    public int hashCode() {
+//        int result = this.name != null ? this.name.hashCode() : 0;
+//        result = 31 * result + Integer.hashCode(this.children);
+//        result = 31 * result + (this.birthday != null ? this.birthday.hashCode() : 0);
+//        return result;
+//    }
+
     /**
-     * Overridden method hashCode().
-     * @return - User`s hash code.
+     * Overriden method toString().
+     * @return - User description.
      */
     @Override
-    public int hashCode() {
-        int result = this.name != null ? this.name.hashCode() : 0;
-        result = 31 * result + Integer.hashCode(this.children);
-        result = 31 * result + (this.birthday != null ? this.birthday.hashCode() : 0);
-        return result;
+    public String toString() {
+        return "User{"
+                + "name='" + name + '\''
+                + ", children=" + children
+                + ", birthday: " + this.birthday.get(Calendar.YEAR)
+                + ", " + (this.birthday.get(Calendar.MONTH) + 1)
+                + ", " + this.birthday.get(Calendar.DATE)
+                + '}';
     }
 }
