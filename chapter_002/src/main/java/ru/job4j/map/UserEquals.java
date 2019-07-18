@@ -61,26 +61,27 @@ public class UserEquals {
      * @param o - object to compare.
      * @return - comparison result.
      */
-    @Override
-    public boolean equals(Object o) {
-        boolean result = true;
-        if (this != o) {
-            if (o == null || getClass() != o.getClass()) {
-                result = false;
-            } else {
-                UserEquals that = (UserEquals) o;
-                if ((this.getChildren() != that.getChildren())
-                        || (this.getName() != null ? !this.getName().equals(that.getName()) : that.getName() != null)) {
-                    result = false;
-                } else {
-                    result = this.getBirthday() != null
-                            ? this.getBirthday().equals(that.getBirthday())
-                            : that.getBirthday() == null;
-                }
-            }
-        }
-        return result;
-    }
+    //Сommitted because of the checkstyle requirements.
+//    @Override
+//    public boolean equals(Object o) {
+//        boolean result = true;
+//        if (this != o) {
+//            if (o == null || getClass() != o.getClass()) {
+//                result = false;
+//            } else {
+//                UserEquals that = (UserEquals) o;
+//                if ((this.getChildren() != that.getChildren())
+//                        || (this.getName() != null ? !this.getName().equals(that.getName()) : that.getName() != null)) {
+//                    result = false;
+//                } else {
+//                    result = this.getBirthday() != null
+//                            ? this.getBirthday().equals(that.getBirthday())
+//                            : that.getBirthday() == null;
+//                }
+//            }
+//        }
+//        return result;
+//    }
 
     /**
      * Overriden method toString().

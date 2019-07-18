@@ -17,12 +17,18 @@ public class UserBadHash {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         UserBadHash that = (UserBadHash) o;
 
-        if (age != that.age) return false;
+        if (age != that.age) {
+            return false;
+        }
         return name != null ? name.equals(that.name) : that.name == null;
     }
 
