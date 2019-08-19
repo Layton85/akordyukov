@@ -165,4 +165,35 @@ public class SimpleTreeSetTest {
         tree.add(3, 5);
         it.hasNext();
     }
+
+    @Test
+    public void whenTreeContainsOnlyRootThenItIsBinary() {
+        SimpleTreeSet<Integer> tree = new SimpleTreeSet<>(1);
+        assertThat(tree.isBinary(), is(true));
+    }
+
+    @Test
+    public void whenTreeIsNotBinary() {
+        SimpleTreeSet<Integer> tree = new SimpleTreeSet<>(1);
+        tree.add(1, 6);
+        tree.add(1, 3);
+        tree.add(1, 2);
+        tree.add(6, 5);
+        tree.add(6, 4);
+        tree.add(2, 7);
+        tree.add(2, 8);
+        tree.add(7, 10);
+        tree.add(7, 9);
+        tree.add(8, 11);
+        assertThat(tree.isBinary(), is(false));
+    }
+
+    @Test
+    public void whenTreeIsBinary() {
+        SimpleTreeSet<Integer> tree = new SimpleTreeSet<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(3, 4);
+        assertThat(tree.isBinary(), is(true));
+    }
 }

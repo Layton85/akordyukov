@@ -80,6 +80,24 @@ public class SimpleTreeSet<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
+     * The method defines if the SimpleTreeSet is binary or not.
+     * @return - true if binary,
+     *           false - otherwise.
+     */
+    public boolean isBinary() {
+        boolean result = true;
+        Iterator<E> it = this.iterator();
+        while (it.hasNext()) {
+            Optional<Node<E>> node = this.findBy(it.next());
+            if (node.isPresent() && node.get().leaves().size() > 2) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
+    /**
      * Returns an iterator over elements of type {@code T}.
      * Iterator is using pre-order tree traversal (root, left, right).
      * @return an Iterator.
@@ -124,6 +142,35 @@ public class SimpleTreeSet<E extends Comparable<E>> implements SimpleTree<E> {
                     cursor = buff.element();
                 }
                 return result;
+            }
+        };
+    }
+
+    /**
+     * The method returns alternative "layered" iterator.
+     * This iterator is using "layered" way of tree traversal (root, the layer of root leaves....)
+     * @return - "layered" iterator.
+     */
+    public Iterator<E> layeredIterator() {
+        return new Iterator<E>() {
+            private final int expectedModeCount = modCount;
+            private Deque<Node<E>> buff = new LinkedList<>(Collections.singletonList(root));
+            @Override
+            public boolean hasNext() {
+                if (this.expectedModeCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return !buff.isEmpty();
+            }
+
+            @Override
+            public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                Node<E> poll = buff.poll();
+                buff.addAll(poll.leaves());
+                return poll.getValue();
             }
         };
     }
