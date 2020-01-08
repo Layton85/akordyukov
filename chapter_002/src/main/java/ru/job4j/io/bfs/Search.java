@@ -1,4 +1,4 @@
-package ru.job4j.bfs;
+package ru.job4j.io.bfs;
 
 import java.io.File;
 import java.util.ArrayDeque;

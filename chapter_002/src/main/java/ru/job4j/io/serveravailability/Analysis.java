@@ -1,4 +1,4 @@
-package ru.job4j.serveravailability;
+package ru.job4j.io.serveravailability;
 
 import java.io.*;
 import java.util.Arrays;

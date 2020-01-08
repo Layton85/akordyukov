@@ -1,4 +1,4 @@
-package ru.job4j.serveravailability;
+package ru.job4j.io.serveravailability;
 
 import org.junit.Test;
 
@@ -18,8 +18,8 @@ import static org.hamcrest.core.Is.is;
  */
 public class AnalysisTest {
     private String s = File.separator;
-    private String sourceBase = "." + s + "src" + s + "test" + s + "java" + s + "ru" + s + "job4j" + s + "serveravailability" + s;
-    private String target = "." + s + "src" + s + "test" + s + "java" + s + "ru" + s + "job4j" + s + "serveravailability" + s + "unavaliable.csv";
+    private String sourceBase = "." + s + "src" + s + "test" + s + "java" + s + "ru" + s + "job4j"  + s + "io" + s + "serveravailability" + s;
+    private String target = "." + s + "src" + s + "test" + s + "java" + s + "ru" + s + "job4j" + s + "io"  + s + "serveravailability" + s + "unavaliable.csv";
 
     Analysis analysis = new Analysis();
 

@@ -1,6 +1,7 @@
-package ru.job4j.io;
+package ru.job4j.io.configreading;
 
 import org.junit.Test;
+import ru.job4j.io.configreading.Config;
 
 import java.io.File;
 
