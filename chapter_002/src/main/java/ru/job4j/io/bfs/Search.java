@@ -102,7 +102,6 @@ public class Search {
      */
     public <T> List<File> files(String parent, T val, BiPredicate<T, File> biPredicate) {
         List<File> files = new ArrayList<>();
-        if (val != null) {
             Queue<File> queue = new ArrayDeque<>();
             queue.offer(new File(parent));
             while (!queue.isEmpty()) {
@@ -117,7 +116,6 @@ public class Search {
                     files.add(curFile);
                 }
             }
-        }
         return files;
     }
 }

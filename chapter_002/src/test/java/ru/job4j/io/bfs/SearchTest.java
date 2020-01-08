@@ -36,7 +36,7 @@ public class SearchTest {
     };
     private final BiPredicate<List<String>, File> biPredicate = (List<String> exts, File file) -> {
         boolean result = false;
-        if (file.exists() && file.isFile()) {
+        if (file.exists() && file.isFile() && exts != null) {
             for (String ext : exts) {
                 if (file.getName().endsWith(ext)) {
                     result = true;
